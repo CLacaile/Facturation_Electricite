@@ -17,6 +17,8 @@ public class Horaires {
 	@ManyToOne
 	private Consommation consommation;
 	@OneToMany(mappedBy = "horaires", cascade = CascadeType.ALL)
+
+
 	private List<Tarif> tarifs;
 	/**
 	 * @return the id
@@ -85,10 +87,16 @@ public class Horaires {
 		this.tarifs = tarifs;
 	}
 
+	/**
+	 * @return the consommation
+	 */
 	public Consommation getConsommation() {
 		return consommation;
 	}
 
+	/**
+	 * @param consommation
+	 */
 	public void setConsommation(Consommation consommation) {
 		this.consommation = consommation;
 	}
