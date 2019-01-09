@@ -10,7 +10,8 @@ import java.time.LocalDate;
 public class CompteurDAO {
     /**
      * Create a new compteur at an existing adresse. It sets the personne attribute of the new compteur as the personne
-     * at the specified adresse.
+     * at the specified adresse and the compteur of personne as the newly created compteur. If the personne doesn't exist,
+     * the creation is aborted
      * @param em
      * @param dateActivation
      * @param adresse
@@ -20,10 +21,17 @@ public class CompteurDAO {
         Compteur compteur = new Compteur();
         compteur.setDate(dateActivation);
         compteur.setAdresse(adresse);
-        compteur.setPersonne(adresse.getPersonne());
+        Personne personne = adresse.getPersonne();
+        if(personne == null) {
+            System.out.println("Personne n'habite a l'adresse existante. Abandon de la creation.");
+            return null;
+        }
+        compteur.setPersonne(personne);
         adresse.setCompteur(compteur);
+        personne.setCompteur(compteur);
 
         em.getTransaction().begin();
+        em.persist(personne);
         em.persist(adresse);
         em.persist(compteur);
         em.getTransaction().commit();
