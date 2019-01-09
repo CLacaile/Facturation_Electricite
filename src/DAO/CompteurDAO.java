@@ -83,4 +83,26 @@ public class CompteurDAO {
         em.getTransaction().commit();
         return compteur;
     }
+
+    /**
+     * Update the personne attribute of a compteur. It also updates the compteur attributes of a personne and the adres-
+     * se attribute of the personne to put the same adresse as the compteur
+     * @param em
+     * @param compteur the compteur to update
+     * @param personne the personne to update
+     * @return the updated compteur
+     */
+    public static Compteur updatePersonne(EntityManager em, Compteur compteur, Personne personne) {
+        Adresse adr = compteur.getAdresse();
+        compteur.setPersonne(personne);
+        personne.setCompteur(compteur);
+        personne.setAdresse(adr);
+        adr.setPersonne(personne);
+        em.getTransaction().begin();
+        em.persist(compteur);
+        em.persist(personne);
+        em.getTransaction().commit();
+        return compteur;
+    }
+
 }
