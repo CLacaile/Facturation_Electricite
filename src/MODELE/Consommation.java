@@ -31,8 +31,15 @@ public class Consommation {
 	/**
 	 * @param horaires the horaires to set
 	 */
-	public void setHoraires(ArrayList<Horaires> horaires) {
+	public void setHoraires(List<Horaires> horaires) {
 		this.horaires = horaires;
 	}
 
+	public Compteur getCompteur() {
+		return compteur;
+	}
+
+	public void setCompteur(Compteur compteur) {
+		this.compteur = compteur;
+	}
 }
