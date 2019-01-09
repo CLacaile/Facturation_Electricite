@@ -8,6 +8,17 @@ import javax.persistence.EntityManager;
 import java.time.LocalDate;
 
 public class PersonneDAO {
+
+    /**
+     * Find a personne in the DB
+     * @param em the EntityManager
+     * @param numSS the numero de securite sociale
+     * @return the personne
+     */
+    public static Personne find(EntityManager em, long numSS) {
+        return (Personne) em.find(Personne.class, numSS);
+    }
+
     /**
      * Create a person with no compteur or adresse in the database. To set these values, use updateAdresse and updateCompteur
      * @param em

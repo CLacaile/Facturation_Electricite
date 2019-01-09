@@ -26,6 +26,7 @@ public class Main {
             p = PersonneDAO.updateAdresse(em, p, a);
             Compteur c = CompteurDAO.createCompteur(em, date1, a);
             CompteurDAO.updatePersonne(em, c, p);
+            System.out.println(PersonneDAO.find(em, 11111).getNumSS());
         } catch (Exception e){
             e.printStackTrace();
         }
