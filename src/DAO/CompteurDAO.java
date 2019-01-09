@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import java.time.LocalDate;
 
 public class CompteurDAO {
-    public Compteur createCompteur(EntityManager em, LocalDate dateActivation, String rue, String ville) {
+    public static Compteur createCompteur(EntityManager em, LocalDate dateActivation, String rue, String ville) {
         Adresse a = new Adresse();
         a.setRue(rue);
         a.setVille(ville);
