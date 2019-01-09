@@ -53,4 +53,11 @@ public class Adresse {
 	 */
 	public void setCompteur(Compteur compteur) { this.compteur = compteur;}
 
+	public Personne getPersonne() {
+		return personne;
+	}
+
+	public void setPersonne(Personne personne) {
+		this.personne = personne;
+	}
 }
