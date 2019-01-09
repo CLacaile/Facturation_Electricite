@@ -1,8 +1,10 @@
 package DAO;
 
 import MODELE.Adresse;
+import MODELE.Compteur;
 import MODELE.Personne;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 
 public class AdresseDAO {
@@ -37,6 +39,23 @@ public class AdresseDAO {
         em.getTransaction().begin();
         em.persist(a);
         em.persist(p);
+        em.getTransaction().commit();
+        return a;
+    }
+
+    /**
+     * Update the compteur attribute of adresse and the adresse attribute of compteur
+     * @param em the EntityManager
+     * @param a the adresse to update
+     * @param c the compteur to update
+     * @return the updated adresse
+     */
+    public static Adresse updateCompteur(EntityManager em, Adresse a, Compteur c) {
+        a.setCompteur(c);
+        c.setAdresse(a);
+        em.getTransaction().begin();
+        em.persist(a);
+        em.persist(c);
         em.getTransaction().commit();
         return a;
     }
