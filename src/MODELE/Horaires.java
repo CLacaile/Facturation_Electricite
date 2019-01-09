@@ -85,4 +85,11 @@ public class Horaires {
 		this.tarifs = tarifs;
 	}
 
+	public Consommation getConsommation() {
+		return consommation;
+	}
+
+	public void setConsommation(Consommation consommation) {
+		this.consommation = consommation;
+	}
 }

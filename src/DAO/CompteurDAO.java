@@ -1,6 +1,7 @@
 package DAO;
 import MODELE.Adresse;
 import MODELE.Compteur;
+import MODELE.Consommation;
 import MODELE.Personne;
 
 import javax.persistence.EntityManager;
@@ -54,6 +55,23 @@ public class CompteurDAO {
         em.getTransaction().begin();
         em.persist(compteur);
         em.persist(personne);
+        em.getTransaction().commit();
+        return compteur;
+    }
+
+    /**
+     * Update the consommation attribute of a compteur and updates the compteur attribute of consommation in the DB.
+     * @param em the EntityManager
+     * @param compteur the compteur to update
+     * @param conso the conso to update
+     * @return the updated compteur
+     */
+    public static Compteur updateConsommation(EntityManager em, Compteur compteur, Consommation conso) {
+        compteur.setConsommation(conso);
+        conso.setCompteur(compteur);
+        em.getTransaction().begin();
+        em.persist(compteur);
+        em.persist(conso);
         em.getTransaction().commit();
         return compteur;
     }
