@@ -48,6 +48,23 @@ public class ConsommationDAO {
         return c;
     }
 
+    /**
+     * Add an horaires to the list of horaires in the DB.
+     * @param em the EntityManager
+     * @param c the consommation
+     * @param h the horaires
+     * @return the updated consommation
+     */
+    public static Consommation addHoraires(EntityManager em, Consommation c, Horaires h) {
+        c.getHoraires().add(h);
+        h.setConsommation(c);
+        em.getTransaction().begin();
+        em.persist(c);
+        em.persist(h);
+        em.getTransaction().commit();
+        return c;
+    }
+
 
 
 
