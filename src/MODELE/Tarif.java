@@ -4,6 +4,15 @@ import MODELE.Horaires;
 
 import javax.persistence.*;
 
+/**
+ * Les tarifs peuvent être différents selon la puissance souscrite par ex :
+ * - tarif 1 : 5 kWh = 1€/kWh
+ * - tarif 2 : 10 kWh = 1,7€/kWh
+ * - tarif 3 : 20 kWh = 3€/kWh
+ * - tarif 4 : 40 kWh = 5€/kWh
+ */
+
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name ="typeTarif", discriminatorType = DiscriminatorType.INTEGER)
@@ -34,4 +43,11 @@ public abstract class Tarif {
 		this.prix = prix;
 	}
 
+	public Horaires getHoraires() {
+		return horaires;
+	}
+
+	public void setHoraires(Horaires horaires) {
+		this.horaires = horaires;
+	}
 }
