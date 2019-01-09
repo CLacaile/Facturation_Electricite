@@ -25,12 +25,6 @@ public class Horaires {
 		return id;
 	}
 	/**
-	 * @param id the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
-	/**
 	 * @return the date
 	 */
 	public LocalDate getDate() {

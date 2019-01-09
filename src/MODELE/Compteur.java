@@ -22,12 +22,6 @@ public class Compteur {
 		return numC;
 	}
 	/**
-	 * @param numC the numC to set
-	 */
-	public void setNumC(long numC) {
-		this.numC = numC;
-	}
-	/**
 	 * @return the adresse
 	 */
 	public Adresse getAdresse() {
