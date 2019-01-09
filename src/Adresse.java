@@ -1,4 +1,3 @@
-
 public class Adresse {
 	private long id;
 	private String rue;
