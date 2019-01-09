@@ -52,4 +52,12 @@ public class Compteur {
 	public void setPersonne(Personne personne) {
 		this.personne = personne;
 	}
+
+    public Consommation getConsommation() {
+        return consommation;
+    }
+
+    public void setConsommation(Consommation consommation) {
+        this.consommation = consommation;
+    }
 }
