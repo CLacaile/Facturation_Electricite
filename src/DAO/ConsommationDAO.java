@@ -9,6 +9,16 @@ import java.util.List;
 
 public class ConsommationDAO {
     /**
+     * Find a Consommation in the DB
+     * @param em the EntityManager
+     * @param id the id of the consommation
+     * @return the consommation
+     */
+    public static Consommation find(EntityManager em, long id) {
+        return (Consommation) em.find(Consommation.class, id);
+    }
+
+    /**
      * Create a consommation without horaires but with a compteur in the DB. Use updateHoraires to set the horaires
      * @param em
      * @return the new consommation associated to a compteur
@@ -38,15 +48,7 @@ public class ConsommationDAO {
         return c;
     }
 
-    /**
-     * Find a Consommation in the DB
-     * @param em the EntityManager
-     * @param id the id of the consommation
-     * @return the consommation
-     */
-    public static Consommation find(EntityManager em, long id) {
-        return (Consommation) em.find(Consommation.class, id);
-    }
+
 
 
 }
