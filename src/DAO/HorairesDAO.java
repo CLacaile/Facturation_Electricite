@@ -38,8 +38,34 @@ public class HorairesDAO {
         return h;
     }
 
-    public static Horaires updateConsommation(EntityManager em, Horaires h, Consommation c) {
+    /**
+     * Updates an horaires element in the list of horaires of consommation. If the horaires must either be a new one or
+     * already in consommation
+     * @param em
+     * @param h
+     * @param c
+     * @return
+     */
+    public static Horaires updateConsommation(EntityManager em, Horaires h, Consommation c) throws IllegalArgumentException {
+        if((h.getConsommation() != c)) {
+            System.out.println("L'horaire existe deja dans une autre consommation. Abandon. ");
+            throw new IllegalArgumentException();
+        }
+        //update the horaires element in the list
+        if(c.getHoraires().contains(h)) {
+            int index = c.getHoraires().indexOf(h);
+            c.getHoraires().set(index, h);
+        }
+        //add the horaires to the list
+        else {
+            c.getHoraires().add(h);
+            h.setConsommation(c);
+        }
 
+        em.getTransaction().begin();
+        em.persist(c);
+        em.persist(h);
+        em.getTransaction().commit();
         return h;
     }
 }
