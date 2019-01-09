@@ -1,6 +1,15 @@
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Personne {
+	@Id
 	private long numSS;
 	private String numTel;
+	@OneToOne(mappedBy = "personne", cascade = CascadeType.ALL)
+	private Adresse adresse;
 	/**
 	 * @return the numSS
 	 */

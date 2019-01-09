@@ -1,9 +1,15 @@
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
 public class Compteur {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long numC;
-	private Adresse adresse;
 	private LocalDate date;
+	@OneToOne(mappedBy = "compteur", cascade = CascadeType.ALL)
+	private Adresse adresse;
+
 	
 	/**
 	 * @return the numC

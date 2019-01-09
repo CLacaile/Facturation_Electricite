@@ -1,8 +1,17 @@
+import javax.persistence.*;
+
+@Entity
 public class Adresse {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String rue;
 	private String ville;
 	private String pays;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Compteur compteur;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Personne personne;
 	
 	/**
 	 * @return the id
