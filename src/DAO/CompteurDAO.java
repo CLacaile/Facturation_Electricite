@@ -11,30 +11,25 @@ public class CompteurDAO {
     /**
      * Create a new compteur at an existing adresse. It sets the personne attribute of the new compteur as the personne
      * at the specified adresse and the compteur of personne as the newly created compteur. If the personne doesn't exist,
-     * the creation is aborted
+     * the creation is aborted. Uses AdresseDAO.updatePersonne() and AdresseDAO.updateCompteur().
      * @param em
      * @param dateActivation
      * @param adresse
      * @return the created compteur
+     * @see AdresseDAO#updateCompteur(EntityManager, Adresse, Compteur)
+     * @see AdresseDAO#updateCompteur(EntityManager, Adresse, Compteur)
      */
     public static Compteur createCompteur(EntityManager em, LocalDate dateActivation, Adresse adresse) throws Exception {
         Compteur compteur = new Compteur();
         compteur.setDate(dateActivation);
-        compteur.setAdresse(adresse);
         Personne personne = adresse.getPersonne();
         if(personne == null) {
             System.out.println("Personne n'habite a l'adresse existante. Abandon de la creation.");
             throw new Exception();
         }
         compteur.setPersonne(personne);
-        adresse.setCompteur(compteur);
-        personne.setCompteur(compteur);
-
-        em.getTransaction().begin();
-        em.persist(personne);
-        em.persist(adresse);
-        em.persist(compteur);
-        em.getTransaction().commit();
+        AdresseDAO.updatePersonne(em, adresse, personne);
+        AdresseDAO.updateCompteur(em, adresse, compteur);
         return compteur;
     }
 
@@ -45,20 +40,13 @@ public class CompteurDAO {
      * @param rue
      * @param ville
      * @return the created compteur
+     * @see AdresseDAO#updateCompteur(EntityManager, Adresse, Compteur)
      */
     public static Compteur createCompteur(EntityManager em, LocalDate dateActivation, String rue, String ville) {
         Compteur compteur = new Compteur();
         compteur.setDate(dateActivation);
-        Adresse adresse = new Adresse();
-        adresse.setVille(ville);
-        adresse.setRue(rue);
-        compteur.setAdresse(adresse);
-        adresse.setCompteur(compteur);
-
-        em.getTransaction().begin();
-        em.persist(adresse);
-        em.persist(compteur);
-        em.getTransaction().commit();
+        Adresse a = AdresseDAO.createAdresse(em, rue, ville);
+        AdresseDAO.updateCompteur(em, a, compteur);
         return compteur;
     }
 
