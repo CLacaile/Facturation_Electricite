@@ -38,4 +38,17 @@ public class PersonneDAO {
         AdresseDAO.updatePersonne(em, a, p);
         return p;
     }
+
+    /**
+     * Update the compteur attribute of personne and the personne attribute of compteur in the DB. Use CompteurDAO#updatePersonne()
+     * @param em the EntityManager
+     * @param p the personne to update
+     * @param c the compteur to update
+     * @return the updated personne
+     * @see CompteurDAO#updatePersonne(EntityManager, Compteur, Personne)
+     */
+    public static Personne updateCompteur(EntityManager em, Personne p, Compteur c) {
+        CompteurDAO.updatePersonne(em, c, p);
+        return p;
+    }
 }
