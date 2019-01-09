@@ -58,8 +58,8 @@ public class HorairesDAO {
         }
         //add the horaires to the list
         else {
-            c.getHoraires().add(h);
-            h.setConsommation(c);
+            ConsommationDAO.addHoraires(em, c, h);
+            return h;
         }
 
         em.getTransaction().begin();
