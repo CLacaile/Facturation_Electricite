@@ -1,15 +1,14 @@
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Consommation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private ArrayList<Horaires> horaires;
+	@OneToMany(mappedBy = "consommation", cascade = CascadeType.ALL)
+	private List<Horaires> horaires;
 
 	/**
 	 * @return the id
@@ -28,7 +27,7 @@ public class Consommation {
 	/**
 	 * @return the horaires
 	 */
-	public ArrayList<Horaires> getHoraires() {
+	public List<Horaires> getHoraires() {
 		return horaires;
 	}
 

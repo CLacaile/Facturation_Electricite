@@ -1,6 +1,4 @@
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -14,6 +12,9 @@ public class Horaires {
 	private LocalTime heureDeb;
 	private LocalTime heureArr;
 	private int puissance;
+	@ManyToOne
+	private Consommation consommation;
+
 	private ArrayList<Tarif> tarifs;
 	/**
 	 * @return the id
