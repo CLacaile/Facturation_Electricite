@@ -13,7 +13,8 @@ public class Compteur {
 	private Adresse adresse;
 	@OneToOne(mappedBy = "compteur", cascade = CascadeType.ALL)
 	private Consommation consommation;
-
+	@OneToOne(cascade = CascadeType.ALL)
+	private Personne personne;
 	
 	/**
 	 * @return the numC
@@ -45,5 +46,10 @@ public class Compteur {
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
-	
+
+	public Personne getPersonne() { return personne;}
+
+	public void setPersonne(Personne personne) {
+		this.personne = personne;
+	}
 }
