@@ -37,7 +37,11 @@ public class Main {
         p2.setNumTel("0606060606");
         p2.setAdresse(adr3);
         adr3.setPersonne(p2);
-        CompteurDAO.createCompteur(em, date1, adr3);
+        try {
+            CompteurDAO.createCompteur(em, date1, adr3);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         //Test de création compteur 2 sans adresse existante ni personne
         Compteur compt = CompteurDAO.createCompteur(em, date1, "Grammont", "Tours");
