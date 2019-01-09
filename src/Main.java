@@ -1,4 +1,6 @@
+import DAO.AdresseDAO;
 import DAO.CompteurDAO;
+import DAO.PersonneDAO;
 import MODELE.Adresse;
 import MODELE.Compteur;
 import MODELE.Personne;
@@ -17,22 +19,16 @@ public class Main {
 
         LocalDate date1 = LocalDate.now();
 
-        //Test de création compteur 1 avec une adresse existante
-        Adresse adr3 = new Adresse();
-        adr3.setRue("Parmentier");
-        adr3.setVille("Tours");
-        Personne p2 = new Personne();
-        p2.setNumSS(22222);
-        p2.setNumTel("0606060606");
-        p2.setAdresse(adr3);
-        adr3.setPersonne(p2);
+        // Test
         try {
-            CompteurDAO.createCompteur(em, date1, adr3);
-        } catch (Exception e) {
+            Personne p = PersonneDAO.createPersonne(em, 11111, "0606060606");
+            Adresse a = AdresseDAO.createAdresse(em, "Parmentier", "Tours");
+            p = PersonneDAO.updateAdresse(em, p, a);
+            Compteur c = CompteurDAO.createCompteur(em, date1, a);
+            CompteurDAO.updatePersonne(em, c, p);
+        } catch (Exception e){
             e.printStackTrace();
         }
-
-
 
     }
 }
