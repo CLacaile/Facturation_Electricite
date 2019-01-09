@@ -1,6 +1,8 @@
 import javax.persistence.*;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name ="typeTarif", discriminatorType = DiscriminatorType.INTEGER)
 public abstract class Tarif {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
