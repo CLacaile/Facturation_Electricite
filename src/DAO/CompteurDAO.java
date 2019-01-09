@@ -17,4 +17,20 @@ public class CompteurDAO {
         em.getTransaction().commit();
         return compteur;
     }
+
+    public static Compteur createCompteur(EntityManager em, LocalDate dateActivation, String rue, String ville) {
+        Compteur compteur = new Compteur();
+        compteur.setDate(dateActivation);
+        Adresse adresse = new Adresse();
+        adresse.setVille(ville);
+        adresse.setRue(rue);
+        compteur.setAdresse(adresse);
+        adresse.setCompteur(compteur);
+
+        em.getTransaction().begin();
+        em.persist(adresse);
+        em.persist(compteur);
+        em.getTransaction().commit();
+        return compteur;
+    }
 }
