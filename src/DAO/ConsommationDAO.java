@@ -37,4 +37,16 @@ public class ConsommationDAO {
         em.persist(horaires);
         return c;
     }
+
+    /**
+     * Find a Consommation in the DB
+     * @param em the EntityManager
+     * @param id the id of the consommation
+     * @return the consommation
+     */
+    public static Consommation find(EntityManager em, long id) {
+        return (Consommation) em.find(Consommation.class, id);
+    }
+
+
 }
