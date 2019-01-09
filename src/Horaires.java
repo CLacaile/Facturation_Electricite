@@ -1,8 +1,14 @@
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+@Entity
 public class Horaires {
+	@Id
+	@GeneratedValue
 	private long id;
 	private LocalDate date;
 	private LocalTime heureDeb;

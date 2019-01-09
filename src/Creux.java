@@ -1,3 +1,6 @@
+import javax.persistence.Entity;
+
+@Entity
 public class Creux extends Tarif {
 	private double reduction;
 	
