@@ -7,7 +7,11 @@ import javax.persistence.EntityManager;
 import java.time.LocalDate;
 
 
+
+// PAS DE UPDATE ADRESSE CAR ON NE PEUT PAS DEPLACER UN COMPTEUR D'UNE HABITATION A UNE AUTRE.
+// DONC LE CREATE DOIT FORCEMENT PRENDRE EN PARAMETRE UNE ADRESSE
 public class CompteurDAO {
+
     /**
      * Create a new compteur at an existing adresse. It sets the personne attribute of the new compteur as the personne
      * at the specified adresse and the compteur of personne as the newly created compteur. If the personne doesn't exist,
@@ -34,45 +38,6 @@ public class CompteurDAO {
     }
 
     /**
-     * Create a new compteur and a new adresse in the database with no personne associated !
-     * @param em
-     * @param dateActivation
-     * @param rue
-     * @param ville
-     * @return the created compteur
-     * @see AdresseDAO#updateCompteur(EntityManager, Adresse, Compteur)
-     */
-    public static Compteur createCompteur(EntityManager em, LocalDate dateActivation, String rue, String ville) {
-        Compteur compteur = new Compteur();
-        compteur.setDate(dateActivation);
-        Adresse a = AdresseDAO.createAdresse(em, rue, ville);
-        AdresseDAO.updateCompteur(em, a, compteur);
-        return compteur;
-    }
-
-    /**
-     * Create a compteur for an existing personne. It uses the adresse of the personne as adresse for the new compteur
-     * @param em
-     * @param dateActivation
-     * @param personne
-     * @return the created compteur
-     */
-    public static Compteur createCompteur(EntityManager em, LocalDate dateActivation, Personne personne) {
-        Compteur compteur = new Compteur();
-        compteur.setDate(dateActivation);
-        compteur.setPersonne(personne);
-        Adresse adresse = personne.getAdresse();
-        compteur.setAdresse(adresse);
-        adresse.setCompteur(compteur);
-
-        em.getTransaction().begin();
-        em.persist(adresse);
-        em.persist(compteur);
-        em.getTransaction().commit();
-        return compteur;
-    }
-
-    /**
      * Update the personne attribute of a compteur. It also updates the compteur attributes of a personne and the adres-
      * se attribute of the personne to put the same adresse as the compteur
      * @param em
@@ -92,5 +57,6 @@ public class CompteurDAO {
         em.getTransaction().commit();
         return compteur;
     }
+
 
 }
