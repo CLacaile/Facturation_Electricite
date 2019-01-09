@@ -14,6 +14,9 @@ public class Personne {
 	private String numTel;
 	@OneToOne(mappedBy = "personne", cascade = CascadeType.ALL)
 	private Adresse adresse;
+	@OneToOne(mappedBy = "personne", cascade = CascadeType.ALL)
+	private Compteur compteur;
+
 	/**
 	 * @return the numSS
 	 */
@@ -38,6 +41,13 @@ public class Personne {
 	public void setNumTel(String numTel) {
 		this.numTel = numTel;
 	}
-	
+
+	public Compteur getCompteur() {return compteur;}
+
+	public void setCompteur(Compteur compteur) {this.compteur = compteur;}
+
+	public Adresse getAdresse() {return adresse;}
+
+	public void setAdresse(Adresse adresse) {this.adresse = adresse;}
 
 }
