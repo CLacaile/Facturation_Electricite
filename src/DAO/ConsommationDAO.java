@@ -38,13 +38,14 @@ public class ConsommationDAO {
      * @return the updated consommation
      */
     public static Consommation updateHoraires(EntityManager em, Consommation c, List<Horaires> horaires) {
-        c.setHoraires(horaires);
+        /*c.setHoraires(horaires);          // NE MARCHE PAS
         for(Horaires h : horaires) {
             h.setConsommation(c);
         }
         em.getTransaction().begin();
         em.persist(c);
         em.persist(horaires);
+        em.getTransaction().commit();*/
         return c;
     }
 
@@ -55,7 +56,11 @@ public class ConsommationDAO {
      * @param h the horaires
      * @return the updated consommation
      */
-    public static Consommation addHoraires(EntityManager em, Consommation c, Horaires h) {
+    public static Consommation addHoraires(EntityManager em, Consommation c, Horaires h) throws IllegalArgumentException {
+        if(c.getHoraires() == null) {
+            System.out.println("Aucune liste d'horaires n'a ete creee. Abandon.");
+            throw new IllegalArgumentException();
+        }
         c.getHoraires().add(h);
         h.setConsommation(c);
         em.getTransaction().begin();
