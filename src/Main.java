@@ -10,6 +10,9 @@ public class Main {
 
         em.getTransaction().begin();
 
+
+
+
         em.getTransaction().commit();
     }
 }

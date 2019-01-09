@@ -1,3 +1,7 @@
+package MODELE;
+
+import MODELE.Horaires;
+
 import javax.persistence.*;
 
 @Entity

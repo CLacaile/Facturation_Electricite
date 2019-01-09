@@ -1,3 +1,7 @@
+package MODELE;
+
+import MODELE.Adresse;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;

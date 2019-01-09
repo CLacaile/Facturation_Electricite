@@ -1,3 +1,5 @@
+package MODELE;
+
 import javax.persistence.*;
 
 @Entity
