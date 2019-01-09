@@ -1,7 +1,7 @@
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Horaires {
@@ -14,8 +14,8 @@ public class Horaires {
 	private int puissance;
 	@ManyToOne
 	private Consommation consommation;
-
-	private ArrayList<Tarif> tarifs;
+	@OneToMany(mappedBy = "horaires", cascade = CascadeType.ALL)
+	private List<Tarif> tarifs;
 	/**
 	 * @return the id
 	 */
@@ -79,13 +79,13 @@ public class Horaires {
 	/**
 	 * @return the tarifs
 	 */
-	public ArrayList<Tarif> getTarifs() {
+	public List<Tarif> getTarifs() {
 		return tarifs;
 	}
 	/**
 	 * @param tarifs the tarifs to set
 	 */
-	public void setTarifs(ArrayList<Tarif> tarifs) {
+	public void setTarifs(List<Tarif> tarifs) {
 		this.tarifs = tarifs;
 	}
 

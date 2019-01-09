@@ -1,7 +1,4 @@
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public abstract class Tarif {
@@ -9,6 +6,8 @@ public abstract class Tarif {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long code;
 	private double prix;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Horaires horaires;
 	
 	/**
 	 * @return the code
