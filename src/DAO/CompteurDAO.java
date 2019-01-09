@@ -17,14 +17,14 @@ public class CompteurDAO {
      * @param adresse
      * @return the created compteur
      */
-    public static Compteur createCompteur(EntityManager em, LocalDate dateActivation, Adresse adresse) {
+    public static Compteur createCompteur(EntityManager em, LocalDate dateActivation, Adresse adresse) throws Exception {
         Compteur compteur = new Compteur();
         compteur.setDate(dateActivation);
         compteur.setAdresse(adresse);
         Personne personne = adresse.getPersonne();
         if(personne == null) {
             System.out.println("Personne n'habite a l'adresse existante. Abandon de la creation.");
-            return null;
+            throw new Exception();
         }
         compteur.setPersonne(personne);
         adresse.setCompteur(compteur);
