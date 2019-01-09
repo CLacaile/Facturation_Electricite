@@ -7,6 +7,8 @@ public class Consommation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	@OneToOne(cascade = CascadeType.ALL)
+    private Compteur compteur;
 	@OneToMany(mappedBy = "consommation", cascade = CascadeType.ALL)
 	private List<Horaires> horaires;
 

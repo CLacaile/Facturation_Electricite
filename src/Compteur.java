@@ -9,6 +9,8 @@ public class Compteur {
 	private LocalDate date;
 	@OneToOne(mappedBy = "compteur", cascade = CascadeType.ALL)
 	private Adresse adresse;
+	@OneToOne(mappedBy = "compteur", cascade = CascadeType.ALL)
+	private Consommation consommation;
 
 	
 	/**
