@@ -9,7 +9,6 @@ public class Adresse {
 	private long id;
 	private String rue;
 	private String ville;
-	private String pays;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Compteur compteur;
 	@OneToOne(cascade = CascadeType.ALL)
@@ -52,16 +51,12 @@ public class Adresse {
 		this.ville = ville;
 	}
 	/**
-	 * @return the pays
+	 * @return Compteur the compteur
 	 */
-	public String getPays() {
-		return pays;
-	}
+	public Compteur getCompteur() { return compteur;}
 	/**
-	 * @param pays the pays to set
+	 * @param compteur the compteur to set
 	 */
-	public void setPays(String pays) {
-		this.pays = pays;
-	}
+	public void setCompteur(Compteur compteur) { this.compteur = compteur;}
 
 }
