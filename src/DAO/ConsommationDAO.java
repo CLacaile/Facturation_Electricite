@@ -31,25 +31,6 @@ public class ConsommationDAO {
     }
 
     /**
-     * Update the list of horaires of a consommation
-     * @param em the EntityManager
-     * @param c the consommation to update
-     * @param horaires the list of horaires to update
-     * @return the updated consommation
-     */
-    public static Consommation updateHoraires(EntityManager em, Consommation c, List<Horaires> horaires) {
-        /*c.setHoraires(horaires);          // NE MARCHE PAS
-        for(Horaires h : horaires) {
-            h.setConsommation(c);
-        }
-        em.getTransaction().begin();
-        em.persist(c);
-        em.persist(horaires);
-        em.getTransaction().commit();*/
-        return c;
-    }
-
-    /**
      * Add an horaires to the list of horaires in the DB.
      * @param em the EntityManager
      * @param c the consommation
