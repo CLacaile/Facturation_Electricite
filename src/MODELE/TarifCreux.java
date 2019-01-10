@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("2")
-public class Creux extends Tarif {
+public class TarifCreux extends Tarif {
 	private double reduction;
 	
 	/**

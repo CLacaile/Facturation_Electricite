@@ -5,6 +5,6 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("1")
-public class Plein extends Tarif {
+public class TarifPlein extends Tarif {
 
 }
