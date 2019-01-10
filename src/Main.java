@@ -20,6 +20,7 @@ public class Main {
         LocalTime time1 = LocalTime.of(10,0);
         LocalTime time2 = LocalTime.of(19,0);
         LocalTime time3 = LocalTime.now();
+        LocalTime time4 = LocalTime.of(23, 59);
 
         try {
             // Test of Personne, Adresse and Compteur + DAO
@@ -34,8 +35,8 @@ public class Main {
             Consommation cons = ConsommationDAO.createConsommation(em, c);
             Horaires h1 = HorairesDAO.createHoraires(em, date1, time1, time2);
             Horaires h2 = HorairesDAO.createHoraires(em, date1, time2, time3);
-            ConsommationDAO.addHoraires(em, cons, h1);
-            ConsommationDAO.addHoraires(em, cons, h2);
+            HorairesDAO.updateConsommation(em, h1, cons);
+            HorairesDAO.updateConsommation(em, h2, cons);
 
         } catch (Exception e){
             e.printStackTrace();
