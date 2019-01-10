@@ -1,7 +1,5 @@
 package MODELE;
 
-import MODELE.Horaires;
-
 import javax.persistence.*;
 
 /**
@@ -16,7 +14,7 @@ import javax.persistence.*;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name ="typeTarif", discriminatorType = DiscriminatorType.INTEGER)
-public abstract class Tarif {
+public class Tarif {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long code;
