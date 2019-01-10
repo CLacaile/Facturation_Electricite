@@ -16,10 +16,11 @@ public class Main {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("bdd_hibernate");
         EntityManager em = emf.createEntityManager();
 
-        LocalDate date1 = LocalDate.now();
+        LocalDate date1 = LocalDate.of(2019, 1, 9);
+        LocalDate date2 = LocalDate.of(2019, 1, 10);
         LocalTime time1 = LocalTime.of(10,0);
-        LocalTime time2 = LocalTime.of(19,0);
-        LocalTime time3 = LocalTime.now();
+        LocalTime time2 = LocalTime.of(15,0);
+        LocalTime time3 = LocalTime.of(19,0);
         LocalTime time4 = LocalTime.of(23, 59);
 
         try {
@@ -35,8 +36,9 @@ public class Main {
             Consommation cons = ConsommationDAO.createConsommation(em, c);
             Horaires h1 = HorairesDAO.createHoraires(em, date1, time1, time2);
             Horaires h2 = HorairesDAO.createHoraires(em, date1, time2, time3);
-            HorairesDAO.updateConsommation(em, h1, cons);
-            HorairesDAO.updateConsommation(em, h2, cons);
+            ConsommationDAO.addHoraires(em, cons, h1);
+            ConsommationDAO.addHoraires(em, cons, h2);
+
 
         } catch (Exception e){
             e.printStackTrace();
