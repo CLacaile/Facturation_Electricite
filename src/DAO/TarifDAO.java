@@ -7,6 +7,7 @@ import MODELE.TarifPlein;
 
 import javax.persistence.EntityManager;
 import java.time.LocalTime;
+import java.util.List;
 
 public class TarifDAO {
 
@@ -78,5 +79,26 @@ public class TarifDAO {
         em.persist(h);
         em.getTransaction().commit();
         return t;
+    }
+
+    /**
+     * Removes the tarif from the tarif creux, tarif plein and horaires associated
+     * @param em the EntityManager
+     * @param t the tarif to remove
+     */
+    public static void removeTarif(EntityManager em, Tarif t) {
+        TarifCreux tc = t.getTarifCreux();
+        tc.setTarif(null);
+        TarifPlein tp = t.getTarifPlein();
+        tp.setTarif(null);
+        List<Horaires> h1 = t.getHoraires();
+        for (Horaires h : h1) {
+            h1.remove(h);
+        }
+        t.setHoraires(null);
+
+        em.getTransaction().begin();
+        em.remove(t);
+        em.getTransaction().commit();
     }
 }
