@@ -17,7 +17,7 @@ public class TarifPleinDAO {
      * @param heureFin the time of end of the plein period (should be the time of beggining of the creux period)
      * @return the new tarif plein
      */
-    protected static TarifPlein createTarifCreux(EntityManager em, double prix, LocalTime heureDeb, LocalTime heureFin) {
+    protected static TarifPlein createTarifPlein(EntityManager em, double prix, LocalTime heureDeb, LocalTime heureFin) {
         TarifPlein tarif = new TarifPlein();
         tarif.setPrix(prix);
         tarif.setHeureDeb(heureDeb);
