@@ -60,6 +60,11 @@ public class AdresseDAO {
         return a;
     }
 
+    /**
+     * Removes the adresse from the compteur and personne associated
+     * @param em the EntityManager
+     * @param a the adresse to remove
+     */
     public static void removeAdresse(EntityManager em, Adresse a) {
         Personne p1 = a.getPersonne();
         p1.setAdresse(null);

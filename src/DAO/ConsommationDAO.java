@@ -61,10 +61,10 @@ public class ConsommationDAO {
         Compteur c1 = c.getCompteur();
         c1.setConsommation(null);
         List<Horaires> h1 = c.getHoraires();
-        c.setHoraires(null);
         for (Horaires h : h1) {
             h1.remove(h);
         }
+        c.setHoraires(null);
 
         em.getTransaction().begin();
         em.remove(c);
