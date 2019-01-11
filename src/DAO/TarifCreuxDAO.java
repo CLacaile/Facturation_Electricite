@@ -59,4 +59,5 @@ public class TarifCreuxDAO {
         em.remove(tc);
         em.getTransaction().commit();
     }
+
 }

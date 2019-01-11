@@ -50,9 +50,9 @@ public class TarifPleinDAO {
      * @param em the EntityManager
      * @param tp the tarif plein to remove
      */
-    public static void removeTarifCreux(EntityManager em, TarifPlein tp) {
+    public static void removeTarifPlein(EntityManager em, TarifPlein tp) {
         Tarif t1 = tp.getTarif();
-        t1.setTarifCreux(null);
+        t1.setTarifPlein(null);
 
         em.getTransaction().begin();
         em.remove(tp);

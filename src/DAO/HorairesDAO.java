@@ -87,4 +87,5 @@ public class HorairesDAO {
         em.remove(h);
         em.getTransaction().commit();
     }
+
 }
