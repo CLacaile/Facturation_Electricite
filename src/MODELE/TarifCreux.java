@@ -1,42 +1,52 @@
 package MODELE;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.time.LocalTime;
 
 @Entity
-@DiscriminatorValue("2")
-public class TarifCreux extends Tarif {
-	private double reduction;
+public class TarifCreux {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	private long code;
+	private double prix;
 	private LocalTime heureDeb;
 	private LocalTime heureFin;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Tarif tarif;
 
-	/**
-	 * @return the reduction
-	 */
-	public double getReduction() {
-		return reduction;
-	}
-	/**
-	 * @param reduction the reduction to set
-	 */
-	public void setReduction(double reduction) {
-		this.reduction = reduction;
-	}
+    public long getCode() {
+        return code;
+    }
 
-	public LocalTime getHeureDeb() {
-		return heureDeb;
-	}
+    public double getPrix() {
+        return prix;
+    }
 
-	public void setHeureDeb(LocalTime heureDeb) {
-		this.heureDeb = heureDeb;
-	}
+    public void setPrix(double prix) {
+        this.prix = prix;
+    }
 
-	public LocalTime getHeureFin() {
-		return heureFin;
-	}
+    public LocalTime getHeureDeb() {
+        return heureDeb;
+    }
 
-	public void setHeureFin(LocalTime heureFin) {
-		this.heureFin = heureFin;
-	}
+    public void setHeureDeb(LocalTime heureDeb) {
+        this.heureDeb = heureDeb;
+    }
+
+    public LocalTime getHeureFin() {
+        return heureFin;
+    }
+
+    public void setHeureFin(LocalTime heureFin) {
+        this.heureFin = heureFin;
+    }
+
+    public Tarif getTarif() {
+        return tarif;
+    }
+
+    public void setTarif(Tarif tarif) {
+        this.tarif = tarif;
+    }
 }

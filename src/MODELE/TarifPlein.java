@@ -1,14 +1,30 @@
 package MODELE;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.time.LocalTime;
 
 @Entity
-@DiscriminatorValue("1")
-public class TarifPlein extends Tarif {
-    LocalTime heureDeb;
-    LocalTime heureFin;
+public class TarifPlein {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long code;
+    private double prix;
+    private LocalTime heureDeb;
+    private LocalTime heureFin;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Tarif tarif;
+
+    public long getCode() {
+        return code;
+    }
+
+    public double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(double prix) {
+        this.prix = prix;
+    }
 
     public LocalTime getHeureDeb() {
         return heureDeb;
@@ -24,5 +40,13 @@ public class TarifPlein extends Tarif {
 
     public void setHeureFin(LocalTime heureFin) {
         this.heureFin = heureFin;
+    }
+
+    public Tarif getTarif() {
+        return tarif;
+    }
+
+    public void setTarif(Tarif tarif) {
+        this.tarif = tarif;
     }
 }
