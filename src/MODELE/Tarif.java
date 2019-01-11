@@ -12,33 +12,53 @@ import javax.persistence.*;
 
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name ="typeTarif", discriminatorType = DiscriminatorType.INTEGER)
 public class Tarif {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long code;
+	private long id;
 	private double prix;
+	private double reduction;
+	@OneToOne(mappedBy = "tarif", cascade = CascadeType.ALL)
+	private TarifCreux tarifCreux;
+	@OneToOne(mappedBy = "tarif", cascade = CascadeType.ALL)
+	private TarifPlein tarifPlein;
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Horaires horaires;
-	
-	/**
-	 * @return the code
-	 */
-	public long getCode() {
-		return code;
+
+	public long getId() {
+		return id;
 	}
-	/**
-	 * @return the prix
-	 */
+
 	public double getPrix() {
 		return prix;
 	}
-	/**
-	 * @param prix the prix to set
-	 */
+
 	public void setPrix(double prix) {
 		this.prix = prix;
+	}
+
+	public double getReduction() {
+		return reduction;
+	}
+
+	public void setReduction(double reduction) {
+		this.reduction = reduction;
+	}
+
+	public TarifCreux getTarifCreux() {
+		return tarifCreux;
+	}
+
+	public void setTarifCreux(TarifCreux tarifCreux) {
+		this.tarifCreux = tarifCreux;
+	}
+
+	public TarifPlein getTarifPlein() {
+		return tarifPlein;
+	}
+
+	public void setTarifPlein(TarifPlein tarifPlein) {
+		this.tarifPlein = tarifPlein;
 	}
 
 	public Horaires getHoraires() {
