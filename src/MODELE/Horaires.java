@@ -15,9 +15,9 @@ public class Horaires {
 	private LocalTime heureDeb;
 	private LocalTime heureArr;
 	private int puissance;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Consommation consommation;
-	@OneToMany(mappedBy = "horaires", cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "horaires", cascade = CascadeType.ALL)
 	private List<Tarif> tarifs = new ArrayList<>();
 
 	/**
