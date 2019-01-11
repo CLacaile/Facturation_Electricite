@@ -1,6 +1,8 @@
 package MODELE;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Les tarifs peuvent être différents selon la puissance souscrite par ex :
@@ -22,8 +24,8 @@ public class Tarif {
 	private TarifCreux tarifCreux;
 	@OneToOne(mappedBy = "tarif", cascade = CascadeType.ALL)
 	private TarifPlein tarifPlein;
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Horaires horaires;
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<Horaires> horaires = new ArrayList<>();
 
 	public double getPrix() {
 		return prix;
@@ -61,11 +63,13 @@ public class Tarif {
 		this.tarifPlein = tarifPlein;
 	}
 
-	public Horaires getHoraires() {
+	public List<Horaires> getHoraires() {
 		return horaires;
 	}
 
-	public void setHoraires(Horaires horaires) {
+	public void setHoraires(List<Horaires> horaires) {
 		this.horaires = horaires;
 	}
+
+
 }
