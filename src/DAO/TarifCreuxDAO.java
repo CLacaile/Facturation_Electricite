@@ -45,4 +45,19 @@ public class TarifCreuxDAO {
         em.getTransaction().commit();
         return tarifCreuxToUpdate;
     }
+
+    /**
+     * Removes the tarif creux from the tarif associated
+     * @param em the EntityManager
+     * @param tc the tarif creux to remove
+     */
+    public static void removeTarifCreux(EntityManager em, TarifCreux tc) {
+        Tarif t1 = tc.getTarif();
+        t1.setTarifCreux(null);
+
+        em.getTransaction().begin();
+        em.remove(tc);
+        em.getTransaction().commit();
+    }
+
 }
