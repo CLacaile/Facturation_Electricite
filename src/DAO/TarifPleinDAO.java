@@ -44,4 +44,18 @@ public class TarifPleinDAO {
         em.getTransaction().commit();
         return tarifPleinToUpdate;
     }
+
+    /**
+     * Removes the tarif plein from the tarif associated
+     * @param em the EntityManager
+     * @param tp the tarif plein to remove
+     */
+    public static void removeTarifCreux(EntityManager em, TarifPlein tp) {
+        Tarif t1 = tp.getTarif();
+        t1.setTarifCreux(null);
+
+        em.getTransaction().begin();
+        em.remove(tp);
+        em.getTransaction().commit();
+    }
 }
