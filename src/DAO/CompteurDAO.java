@@ -76,5 +76,21 @@ public class CompteurDAO {
         return compteur;
     }
 
+    /**
+     * Removes the compteur from the personne and consommation associated
+     * @param em the EntityManager
+     * @param c the compteur to remove
+     */
+    public static void removeCompteur(EntityManager em, Compteur c) {
+        Personne p1 = c.getPersonne();
+        p1.setCompteur(null);
+        Consommation c1 = c.getConsommation();
+        c1.setCompteur(null);
+
+        em.getTransaction().begin();
+        em.remove(c);
+        em.getTransaction().commit();
+    }
+
 
 }
