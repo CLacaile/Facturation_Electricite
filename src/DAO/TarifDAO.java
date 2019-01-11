@@ -55,4 +55,24 @@ public class TarifDAO {
         TarifPleinDAO.updateTarifPlein(em, tarifPlein, tarif);
         return tarif;
     }
+
+    public Tarif addHoraires(EntityManager em, Tarif t, Horaires h) throws Exception {
+        if(t.getHoraires().contains(h) == false) {
+            // t ne contient pas h
+            t.getHoraires().add(h);
+        }
+        else {
+            System.out.println("Le tarif possede deja cet horaire. Abandon.");
+            throw new Exception();
+        }
+        if(h.getTarifs().contains(t) == false) {
+            // h ne contient pas t
+            h.getTarifs().add(t);
+        }
+        else {
+            System.out.println("L'horaire connait deja ce tarif. Abandon.");
+            throw new Exception();
+        }
+        return t;
+    }
 }
