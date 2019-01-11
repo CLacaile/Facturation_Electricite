@@ -32,6 +32,7 @@ public class TarifDAO {
      */
     public static Tarif createTarif(EntityManager em, double prix, double reduction, LocalTime heureDebCreux, LocalTime heureFinCreux){
         Tarif tarif = new Tarif();
+        tarif.setPrix(prix);
         tarif.setReduction(reduction);
 
         TarifPlein tarifPlein = new TarifPlein();
