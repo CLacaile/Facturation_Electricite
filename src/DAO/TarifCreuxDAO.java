@@ -29,8 +29,20 @@ public class TarifCreuxDAO {
         return tarif;
     }
 
-    public static TarifCreux updateHoraires(EntityManager em, TarifCreux tarifToUpdate, Horaires horairesToUpdate) {
-
-        return tarifToUpdate;
+    /**
+     * Update a tarif attibute of the tarif creux and the tarif creux attribute of a tarif in the db
+     * @param em
+     * @param tarifCreuxToUpdate
+     * @param tarifToUpdate
+     * @return
+     */
+    public static TarifCreux updateTarif(EntityManager em, TarifCreux tarifCreuxToUpdate, Tarif tarifToUpdate) {
+        tarifCreuxToUpdate.setTarif(tarifToUpdate);
+        tarifToUpdate.setTarifCreux(tarifCreuxToUpdate);
+        em.getTransaction().begin();
+        em.persist(tarifCreuxToUpdate);
+        em.persist(tarifToUpdate);
+        em.getTransaction().commit();
+        return tarifCreuxToUpdate;
     }
 }
