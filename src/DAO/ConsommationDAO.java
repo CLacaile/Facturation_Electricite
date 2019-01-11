@@ -5,6 +5,7 @@ import MODELE.Consommation;
 import MODELE.Horaires;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConsommationDAO {
@@ -51,7 +52,24 @@ public class ConsommationDAO {
         return c;
     }
 
+    /**
+     * Removes the consommation from the compteur and horaires associated
+     * @param em the EntityManager
+     * @param c the consommation to remove
+     */
+    public static void removeConsommation(EntityManager em, Consommation c) {
+        Compteur c1 = c.getCompteur();
+        c1.setConsommation(null);
+        List<Horaires> h1 = c.getHoraires();
+        c.setHoraires(null);
+        for (Horaires h : h1) {
+            h1.remove(h);
+        }
 
+        em.getTransaction().begin();
+        em.remove(c);
+        em.getTransaction().commit();
+    }
 
 
 }
