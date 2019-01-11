@@ -73,6 +73,10 @@ public class TarifDAO {
             System.out.println("L'horaire connait deja ce tarif. Abandon.");
             throw new Exception();
         }
+        em.getTransaction().begin();
+        em.persist(t);
+        em.persist(h);
+        em.getTransaction().commit();
         return t;
     }
 }
