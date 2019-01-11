@@ -62,4 +62,20 @@ public class PersonneDAO {
         CompteurDAO.updatePersonne(em, c, p);
         return p;
     }
+
+    /**
+     * Removes the personne from the adresse and compteur associated
+     * @param em the EntityManager
+     * @param p the personne to remove
+     */
+    public static void removePersonne(EntityManager em, Personne p) {
+        Adresse a1 = p.getAdresse();
+        a1.setPersonne(null);
+        Compteur c1 = p.getCompteur();
+        c1.setPersonne(null);
+
+        em.getTransaction().begin();
+        em.remove(p);
+        em.getTransaction().commit();
+    }
 }
