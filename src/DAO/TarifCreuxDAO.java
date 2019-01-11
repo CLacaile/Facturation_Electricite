@@ -36,7 +36,7 @@ public class TarifCreuxDAO {
      * @param tarifToUpdate
      * @return
      */
-    public static TarifCreux updateTarif(EntityManager em, TarifCreux tarifCreuxToUpdate, Tarif tarifToUpdate) {
+    public static TarifCreux updateTarifCreux(EntityManager em, TarifCreux tarifCreuxToUpdate, Tarif tarifToUpdate) {
         tarifCreuxToUpdate.setTarif(tarifToUpdate);
         tarifToUpdate.setTarifCreux(tarifCreuxToUpdate);
         em.getTransaction().begin();
