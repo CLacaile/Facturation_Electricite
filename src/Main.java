@@ -40,6 +40,12 @@ public class Main {
             ConsommationDAO.addHoraires(em, cons, h2);
 
 
+
+            TarifDAO.createTarif(em, 1, 0.2, time3, time1);
+
+
+
+
         } catch (Exception e){
             e.printStackTrace();
         }
