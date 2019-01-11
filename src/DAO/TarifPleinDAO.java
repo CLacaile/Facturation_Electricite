@@ -28,8 +28,20 @@ public class TarifPleinDAO {
         return tarif;
     }
 
-    public static TarifPlein updateHoraires(EntityManager em, TarifPlein tarifToUpdate, Horaires horairesToUpdate) {
-
-        return tarifToUpdate;
+    /**
+     * Update a tarif attibute of the tarif plein and the tarif plein attribute of a tarif in the db
+     * @param em
+     * @param tarifCreuxToUpdate
+     * @param tarifToUpdate
+     * @return
+     */
+    public static TarifPlein updateTarifPlein(EntityManager em, TarifPlein tarifPleinToUpdate, Tarif tarifToUpdate) {
+        tarifPleinToUpdate.setTarif(tarifToUpdate);
+        tarifToUpdate.setTarifPlein(tarifPleinToUpdate);
+        em.getTransaction().begin();
+        em.persist(tarifPleinToUpdate);
+        em.persist(tarifToUpdate);
+        em.getTransaction().commit();
+        return tarifPleinToUpdate;
     }
 }
