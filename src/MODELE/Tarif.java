@@ -16,6 +16,7 @@ public class Tarif {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	private double prix;
 	private double reduction;
 	@OneToOne(mappedBy = "tarif", cascade = CascadeType.ALL)
 	private TarifCreux tarifCreux;
@@ -23,6 +24,14 @@ public class Tarif {
 	private TarifPlein tarifPlein;
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Horaires horaires;
+
+	public double getPrix() {
+		return prix;
+	}
+
+	public void setPrix(double prix) {
+		this.prix = prix;
+	}
 
 	public long getId() {
 		return id;
