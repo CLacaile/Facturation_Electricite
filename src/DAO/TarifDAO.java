@@ -21,8 +21,8 @@ public class TarifDAO {
     }
 
     /**
-     * Create a tarif creux and a tarif plein with a prix/kWh and a reduction for tarif creux in the database. It also
-     * defines a
+     * Create a tarif with a tarif creux and a tarif plein with a prix/kWh and a reduction for tarif creux
+     * in the database. It also defines a
      * @param em the EntityManager
      * @param prix the prix/kWh of the tarif
      * @param reduction the reduction between 0 and 1 (ex: 2O% of reduction applied to 1€ = 0.8€)
@@ -31,31 +31,28 @@ public class TarifDAO {
      * @return the new tarif plein
      */
     public static Tarif createTarif(EntityManager em, double prix, double reduction, LocalTime heureDebCreux, LocalTime heureFinCreux){
+        // The tarif
         Tarif tarif = new Tarif();
         tarif.setPrix(prix);
         tarif.setReduction(reduction);
 
+        // The tarif plein
         TarifPlein tarifPlein = new TarifPlein();
         tarifPlein.setPrix(prix);
-
         tarifPlein.setHeureDeb(heureFinCreux);
         tarifPlein.setHeureFin(heureDebCreux);
         tarifPlein.setTarif(tarif);
 
+        // The tarif creux
         TarifCreux tarifCreux = new TarifCreux();
         tarifCreux.setPrix(prix*(1-reduction));
         tarifCreux.setHeureDeb(heureDebCreux);
         tarifCreux.setHeureFin(heureFinCreux);
         tarifCreux.setTarif(tarif);
 
-        tarif.setTarifCreux(tarifCreux);
-        tarif.setTarifPlein(tarifPlein);
-
-        em.getTransaction().begin();
-        em.persist(tarifPlein);
-        em.persist(tarifCreux);
-        em.persist(tarif);
-        em.getTransaction().commit();
+        // Commit to DB
+        TarifCreuxDAO.updateTarifCreux(em, tarifCreux, tarif);
+        TarifPleinDAO.updateTarifPlein(em, tarifPlein, tarif);
         return tarif;
     }
 }
