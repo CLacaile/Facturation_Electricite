@@ -41,7 +41,8 @@ public class Main {
 
 
 
-            TarifDAO.createTarif(em, 1, 0.2, time3, time1);
+            Tarif tarif1 = TarifDAO.createTarif(em, 1, 0.2, time3, time1);  // cree un tarif plein (id1) et un tarif creux (id2)
+            //TarifDAO.updateHoraires(em, tarif1, h1); //marche pas
 
 
 

@@ -1,5 +1,6 @@
 package DAO;
 
+import MODELE.Horaires;
 import MODELE.Tarif;
 import MODELE.TarifCreux;
 import MODELE.TarifPlein;
@@ -46,5 +47,23 @@ public class TarifDAO {
         em.persist(tarifCreux);
         em.getTransaction().commit();
         return tarifPlein;
+    }
+
+    /**
+     * Update the horaires attribute of a tarif and the tarif attribute of a horaires in the DB. Uses
+     * TarifCreuxDAO.updateHoraires and TarifPleinDAO.updateHoraires
+     * @param em
+     * @param tarifToUpdate
+     * @param horairesToUpdate
+     * @see TarifPleinDAO#updateHoraires(EntityManager, TarifPlein, Horaires)
+     * @see TarifCreuxDAO#updateHoraires(EntityManager, TarifCreux, Horaires)
+     */
+    public static void updateHoraires(EntityManager em, Tarif tarifToUpdate, Horaires horairesToUpdate) {
+        if(tarifToUpdate instanceof TarifCreux) {
+            TarifCreuxDAO.updateHoraires(em, (TarifCreux) tarifToUpdate, horairesToUpdate);
+        }
+        else {
+            TarifPleinDAO.updateHoraires(em, (TarifPlein) tarifToUpdate, horairesToUpdate);
+        }
     }
 }

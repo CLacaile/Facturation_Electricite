@@ -2,13 +2,13 @@ package DAO;
 
 import MODELE.Horaires;
 import MODELE.Tarif;
-import MODELE.TarifCreux;
+import MODELE.TarifPlein;
 
 import javax.persistence.EntityManager;
 
-public class TarifCreuxDAO extends TarifDAO {
+public class TarifPleinDAO {
 
-    public static TarifCreux updateHoraires(EntityManager em, TarifCreux tarifToUpdate, Horaires horairesToUpdate) {
+    public static TarifPlein updateHoraires(EntityManager em, TarifPlein tarifToUpdate, Horaires horairesToUpdate) {
         Horaires previousHoraires = tarifToUpdate.getHoraires();
         if(previousHoraires == null) {
             // if the tarif has just been created
