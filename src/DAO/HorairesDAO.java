@@ -2,10 +2,12 @@ package DAO;
 
 import MODELE.Consommation;
 import MODELE.Horaires;
+import MODELE.Tarif;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 public class HorairesDAO {
 
@@ -67,4 +69,22 @@ public class HorairesDAO {
         return h;
     }
 
+    /**
+     * Removes the horaires from the consommation and tarifs associated
+     * @param em the EntityManager
+     * @param h the horaires to remove
+     */
+    public static void removeHoraires(EntityManager em, Horaires h) {
+        Consommation c1 = h.getConsommation();
+        c1.setHoraires(null);
+        List<Tarif> t1 = h.getTarifs();
+        for (Tarif t : t1) {
+            t1.remove(t);
+        }
+        h.setTarifs(null);
+
+        em.getTransaction().begin();
+        em.remove(h);
+        em.getTransaction().commit();
+    }
 }
