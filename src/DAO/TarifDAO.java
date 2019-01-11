@@ -31,39 +31,30 @@ public class TarifDAO {
      * @return the new tarif plein
      */
     public static Tarif createTarif(EntityManager em, double prix, double reduction, LocalTime heureDebCreux, LocalTime heureFinCreux){
-        Tarif tarifPlein = new TarifPlein();
-        tarifPlein.setPrix(prix);
-        ((TarifPlein) tarifPlein).setHeureDeb(heureFinCreux);
-        ((TarifPlein) tarifPlein).setHeureFin(heureDebCreux);
+        Tarif tarif = new Tarif();
+        tarif.setReduction(reduction);
 
-        Tarif tarifCreux = new TarifCreux();
-        ((TarifCreux) tarifCreux).setReduction(reduction);
+        TarifPlein tarifPlein = new TarifPlein();
+        tarifPlein.setPrix(prix);
+
+        tarifPlein.setHeureDeb(heureFinCreux);
+        tarifPlein.setHeureFin(heureDebCreux);
+        tarifPlein.setTarif(tarif);
+
+        TarifCreux tarifCreux = new TarifCreux();
         tarifCreux.setPrix(prix*(1-reduction));
-        ((TarifCreux) tarifCreux).setHeureDeb(heureDebCreux);
-        ((TarifCreux) tarifCreux).setHeureFin(heureFinCreux);
+        tarifCreux.setHeureDeb(heureDebCreux);
+        tarifCreux.setHeureFin(heureFinCreux);
+        tarifCreux.setTarif(tarif);
+
+        tarif.setTarifCreux(tarifCreux);
+        tarif.setTarifPlein(tarifPlein);
 
         em.getTransaction().begin();
         em.persist(tarifPlein);
         em.persist(tarifCreux);
+        em.persist(tarif);
         em.getTransaction().commit();
-        return tarifPlein;
-    }
-
-    /**
-     * Update the horaires attribute of a tarif and the tarif attribute of a horaires in the DB. Uses
-     * TarifCreuxDAO.updateHoraires and TarifPleinDAO.updateHoraires
-     * @param em
-     * @param tarifToUpdate
-     * @param horairesToUpdate
-     * @see TarifPleinDAO#updateHoraires(EntityManager, TarifPlein, Horaires)
-     * @see TarifCreuxDAO#updateHoraires(EntityManager, TarifCreux, Horaires)
-     */
-    public static void updateHoraires(EntityManager em, Tarif tarifToUpdate, Horaires horairesToUpdate) {
-        if(tarifToUpdate instanceof TarifCreux) {
-            TarifCreuxDAO.updateHoraires(em, (TarifCreux) tarifToUpdate, horairesToUpdate);
-        }
-        else {
-            TarifPleinDAO.updateHoraires(em, (TarifPlein) tarifToUpdate, horairesToUpdate);
-        }
+        return tarif;
     }
 }
