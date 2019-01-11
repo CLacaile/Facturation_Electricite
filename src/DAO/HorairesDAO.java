@@ -2,6 +2,7 @@ package DAO;
 
 import MODELE.Consommation;
 import MODELE.Horaires;
+import MODELE.Tarif;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
@@ -63,6 +64,16 @@ public class HorairesDAO {
         em.getTransaction().begin();
         em.persist(c);
         em.persist(h);
+        em.getTransaction().commit();
+        return h;
+    }
+
+    public static Horaires addTarif(EntityManager em, Horaires h, Tarif t) {
+        h.getTarifs().add(t);
+        t.getHoraires().add(h);
+        em.getTransaction().begin();
+        em.persist(h);
+        em.persist(t);
         em.getTransaction().commit();
         return h;
     }
