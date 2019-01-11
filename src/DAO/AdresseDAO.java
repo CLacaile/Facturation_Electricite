@@ -59,4 +59,15 @@ public class AdresseDAO {
         em.getTransaction().commit();
         return a;
     }
+
+    public static void removeAdresse(EntityManager em, Adresse a) {
+        Personne p1 = a.getPersonne();
+        p1.setAdresse(null);
+        Compteur c1 = a.getCompteur();
+        c1.setAdresse(null);
+
+        em.getTransaction().begin();
+        em.remove(a);
+        em.getTransaction().commit();
+    }
 }
