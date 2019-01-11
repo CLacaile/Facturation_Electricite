@@ -5,27 +5,31 @@ import MODELE.Tarif;
 import MODELE.TarifPlein;
 
 import javax.persistence.EntityManager;
+import java.time.LocalTime;
 
 public class TarifPleinDAO {
 
-    public static TarifPlein updateHoraires(EntityManager em, TarifPlein tarifToUpdate, Horaires horairesToUpdate) {
-        Horaires previousHoraires = tarifToUpdate.getHoraires();
-        if(previousHoraires == null) {
-            // if the tarif has just been created
-            tarifToUpdate.setHoraires(horairesToUpdate);
-            horairesToUpdate.getTarifs().add(tarifToUpdate);
-        }
-        else if(previousHoraires != horairesToUpdate) {
-            // if the tarif already exists in an other horaires
-            previousHoraires.getTarifs().remove(tarifToUpdate);
-            tarifToUpdate.setHoraires(horairesToUpdate);
-            horairesToUpdate.getTarifs().add(tarifToUpdate);
-        }
+    /**
+     * Create a tarif plein in the db
+     * @param em the EntityManager
+     * @param prix the prix of the tarif plein
+     * @param heureDeb the time of beggining of the plein period (should be the time of end of the creux period)
+     * @param heureFin the time of end of the plein period (should be the time of beggining of the creux period)
+     * @return the new tarif plein
+     */
+    protected static TarifPlein createTarifCreux(EntityManager em, double prix, LocalTime heureDeb, LocalTime heureFin) {
+        TarifPlein tarif = new TarifPlein();
+        tarif.setPrix(prix);
+        tarif.setHeureDeb(heureDeb);
+        tarif.setHeureFin(heureFin);
         em.getTransaction().begin();
-        em.persist(tarifToUpdate);
-        em.persist(horairesToUpdate);
-        em.persist(previousHoraires);
+        em.persist(tarif);
         em.getTransaction().commit();
+        return tarif;
+    }
+
+    public static TarifPlein updateHoraires(EntityManager em, TarifPlein tarifToUpdate, Horaires horairesToUpdate) {
+
         return tarifToUpdate;
     }
 }
