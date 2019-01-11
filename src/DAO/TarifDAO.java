@@ -56,7 +56,7 @@ public class TarifDAO {
         return tarif;
     }
 
-    public Tarif addHoraires(EntityManager em, Tarif t, Horaires h) throws Exception {
+    public static Tarif addHoraires(EntityManager em, Tarif t, Horaires h) throws Exception {
         if(t.getHoraires().contains(h) == false) {
             // t ne contient pas h
             t.getHoraires().add(h);
