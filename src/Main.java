@@ -19,8 +19,8 @@ public class Main {
         LocalDate date1 = LocalDate.of(2019, 1, 9);
         LocalDate date2 = LocalDate.of(2019, 1, 10);
         LocalTime time1 = LocalTime.of(10,0);
-        LocalTime debutCreux = LocalTime.of(15,0);
-        LocalTime finCreux = LocalTime.of(19,0);
+        LocalTime debutCreux = LocalTime.of(19,0);
+        LocalTime finCreux = LocalTime.of(15,0);
         LocalTime time4 = LocalTime.of(23, 59);
 
         try {
@@ -66,6 +66,11 @@ public class Main {
             List<Tarif> tarifsAppliquesACons1 = TarifDAO.getTarifsByConsommation(em, cons1);
             for(Tarif t : tarifsAppliquesACons1) {
                 System.out.println("Tarif #"+t.getId());
+            }
+            ///ii) test getConsommationByDate
+            List<Consommation> consoDate1 = ConsommationDAO.getConsommationsByDate(em, date1);
+            for(Consommation c : consoDate1) {
+                System.out.println(c.getId());
             }
 
         } catch (Exception e){

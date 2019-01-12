@@ -54,6 +54,11 @@ public class ConsommationDAO {
         return c;
     }
 
+    public static List<Consommation> getConsommationsByDate(EntityManager em, LocalDate date) {
+        String hql = "select c from Consommation c where c.date = :d";
+        return em.createQuery(hql).setParameter("d", date).getResultList();
+    }
+
     /**
      * Removes the consommation from the compteur and horaires associated
      * @param em the EntityManager
