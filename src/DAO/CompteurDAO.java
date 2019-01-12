@@ -106,5 +106,18 @@ public class CompteurDAO {
         em.getTransaction().commit();
     }
 
+    /**
+     * Compute the cost of the consommations of a compteur
+     * @param em
+     * @param c
+     * @param date
+     * @return
+     */
+    public static double computeCost(EntityManager em, Compteur c, LocalDate date) {
+        double cost = 0;
+
+        return cost;
+    }
+
 
 }
