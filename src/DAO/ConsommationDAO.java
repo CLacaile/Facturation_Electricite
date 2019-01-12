@@ -10,6 +10,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.time.temporal.ChronoUnit.MINUTES;
+
+
 public class ConsommationDAO {
     /**
      * Find a Consommation in the DB
@@ -68,6 +71,43 @@ public class ConsommationDAO {
         em.getTransaction().begin();
         em.remove(c);
         em.getTransaction().commit();
+    }
+
+    /**
+     * Compute the cost of a consommation at a given date.
+     * @param em the EntityManager
+     * @param c the consommation
+     * @param date the date
+     * @return the cost
+     */
+    public static double computeCost(EntityManager em, Consommation c, LocalDate date) {
+        double cost = 0;
+        List<Tarif> tarifsConso = TarifDAO.getTarifsByConsommation(em, c);
+        for(Tarif t : tarifsConso) {
+            //Compute the cost of t
+            if(c.getHeureDeb().isBefore(t.getTarifPlein().getHeureDeb())
+            && c.getHeureArr().isBefore(t.getTarifCreux().getHeureDeb())) {
+                //Que du tarif creux sur la periode de conso AVANT la periode pleine
+            }
+            else if(c.getHeureDeb().isAfter(t.getTarifPlein().getHeureFin())
+            && c.getHeureArr().isAfter(t.getTarifPlein().getHeureFin())) {
+                //Que du tarif creux sur le periode de conso APRES la periode pleine
+            }
+            else if(c.getHeureDeb().isBefore(t.getTarifPlein().getHeureDeb())
+                    && (c.getHeureArr().isAfter(t.getTarifPlein().getHeureDeb())
+                        && c.getHeureArr().isBefore(t.getTarifPlein().getHeureFin()))) {
+                //La periode de conso commence en tarif creux et fini pdt la periode pleine
+            }
+            else if((c.getHeureDeb().isAfter(t.getTarifPlein().getHeureDeb())
+                    && c.getHeureDeb().isBefore(t.getTarifPlein().getHeureFin()))
+                    && c.getHeureArr().isAfter(t.getTarifPlein().getHeureFin())) {
+                //La periode de conso commence en tarif plein et fini après la periode creuse
+            }
+            else {
+                //Que du tarif plein sur la periode de conso
+            }
+        }
+        return cost;
     }
 
 
