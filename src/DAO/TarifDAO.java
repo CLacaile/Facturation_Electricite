@@ -3,6 +3,7 @@ package DAO;
 import MODELE.*;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -84,6 +85,21 @@ public class TarifDAO {
         em.persist(c);
         em.getTransaction().commit();
         return t;
+    }
+
+    /**
+     * Return the tarifs from the db.
+     * @param em the EntityManager
+     * @return the tarifs of the db
+     */
+    public static List<Tarif> getAllTarifs(EntityManager em) {
+        Query query = em.createQuery("select t from Tarif t");
+        return query.getResultList();
+    }
+
+    public static List<Tarif> getTarifsByConsommation(EntityManager em, Consommation c) {
+        String hql = "select distinct t from Tarif t join t.consommations c where c = :conso";
+        return em.createQuery(hql).setParameter("conso", c).getResultList();
     }
 
     /**

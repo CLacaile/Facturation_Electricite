@@ -61,9 +61,12 @@ public class Main {
             cons2 = ConsommationDAO.addTarif(em, cons2, tarif2);
             cons3 = ConsommationDAO.addTarif(em, cons3, tarif3);
 
-            System.out.println(PersonneDAO.find(em, 11111).getNumSS());
-
             // Question 2 : combien vaut la conso des compteurs pour la journée date1 ?
+            ///i) test getTarifByConso
+            List<Tarif> tarifsAppliquesACons1 = TarifDAO.getTarifsByConsommation(em, cons1);
+            for(Tarif t : tarifsAppliquesACons1) {
+                System.out.println("Tarif #"+t.getId());
+            }
 
         } catch (Exception e){
             e.printStackTrace();
