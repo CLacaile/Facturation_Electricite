@@ -17,7 +17,10 @@ public class Horaires {
 	private int puissance;
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Consommation consommation;
-	@ManyToMany(mappedBy = "horaires", cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "Horaires_Tarif",
+			joinColumns = {@JoinColumn(name = "Horaires_Id"/*, referencedColumnName = "id"*/)},
+			inverseJoinColumns = {@JoinColumn(name = "Tarif_Id"/*, referencedColumnName = "id"*/)})
 	private List<Tarif> tarifs = new ArrayList<>();
 
 	/**
