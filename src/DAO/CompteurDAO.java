@@ -6,7 +6,7 @@ import MODELE.Personne;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
-
+import java.util.List;
 
 
 // PAS DE UPDATE ADRESSE CAR ON NE PEUT PAS DEPLACER UN COMPTEUR D'UNE HABITATION A UNE AUTRE.
@@ -59,6 +59,16 @@ public class CompteurDAO {
         return compteur;
     }
 
+    public static Compteur addConsommation(EntityManager em, Compteur compteur, Consommation conso) {
+        conso.setCompteur(compteur);
+        compteur.getConsommations().add(conso);
+        em.getTransaction().begin();
+        em.persist(compteur);
+        em.persist(conso);
+        em.getTransaction().commit();
+        return compteur;
+    }
+
     /**
      * Update the consommation attribute of a compteur and updates the compteur attribute of consommation in the DB.
      * @param em the EntityManager
@@ -66,9 +76,11 @@ public class CompteurDAO {
      * @param conso the conso to update
      * @return the updated compteur
      */
-    public static Compteur updateConsommation(EntityManager em, Compteur compteur, Consommation conso) {
-        compteur.setConsommation(conso);
-        conso.setCompteur(compteur);
+    public static Compteur updateConsommations(EntityManager em, Compteur compteur, List<Consommation> conso) {
+        compteur.setConsommations(conso);
+        for(Consommation c : conso) {
+            c.setCompteur(compteur);
+        }
         em.getTransaction().begin();
         em.persist(compteur);
         em.persist(conso);
@@ -84,8 +96,10 @@ public class CompteurDAO {
     public static void removeCompteur(EntityManager em, Compteur c) {
         Personne p1 = c.getPersonne();
         p1.setCompteur(null);
-        Consommation c1 = c.getConsommation();
-        c1.setCompteur(null);
+        List<Consommation> c1 = c.getConsommations();
+        for (Consommation cons : c1) {
+            cons.setCompteur(null);
+        }
 
         em.getTransaction().begin();
         em.remove(c);

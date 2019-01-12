@@ -2,9 +2,11 @@ package DAO;
 
 import MODELE.Compteur;
 import MODELE.Consommation;
-import MODELE.Horaires;
+import MODELE.Tarif;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +25,17 @@ public class ConsommationDAO {
      * Create a consommation without horaires but with a compteur in the DB. Use updateHoraires to set the horaires
      * @param em
      * @return the new consommation associated to a compteur
-     * @see CompteurDAO#updateConsommation(EntityManager, Compteur, Consommation)
+     * @see CompteurDAO#addConsommation(EntityManager, Compteur, Consommation)
      */
-    public static Consommation createConsommation(EntityManager em, Compteur c) {
+    public static Consommation createConsommation(EntityManager em, LocalDate date, LocalTime heureDeb, LocalTime heureFin,
+                                                  int puissance, Compteur compteur) {
         Consommation consommation = new Consommation();
-        CompteurDAO.updateConsommation(em, c, consommation);
+        consommation.setDate(date);
+        consommation.setHeureDeb(heureDeb);
+        consommation.setHeureArr(heureFin);
+        consommation.setPuissance(puissance);
+        consommation.setCompteur(compteur);
+        CompteurDAO.addConsommation(em, compteur, consommation);
         return consommation;
     }
 
@@ -35,20 +43,11 @@ public class ConsommationDAO {
      * Add an horaires to the list of horaires in the DB.
      * @param em the EntityManager
      * @param c the consommation
-     * @param h the horaires
+     * @param t the tarif
      * @return the updated consommation
      */
-    public static Consommation addHoraires(EntityManager em, Consommation c, Horaires h) throws IllegalArgumentException {
-        if(c.getHoraires() == null) {
-            System.out.println("Aucune liste d'horaires n'a ete creee. Abandon.");
-            throw new IllegalArgumentException();
-        }
-        c.getHoraires().add(h);
-        h.setConsommation(c);
-        em.getTransaction().begin();
-        em.persist(c);
-        em.persist(h);
-        em.getTransaction().commit();
+    public static Consommation addTarif(EntityManager em, Consommation c, Tarif t) throws Exception {
+        TarifDAO.addConsommation(em, t, c);
         return c;
     }
 
@@ -59,12 +58,12 @@ public class ConsommationDAO {
      */
     public static void removeConsommation(EntityManager em, Consommation c) {
         Compteur c1 = c.getCompteur();
-        c1.setConsommation(null);
-        List<Horaires> h1 = c.getHoraires();
-        for (Horaires h : h1) {
-            h1.remove(h);
+        c1.setConsommations(null);
+        List<Tarif> t1 = c.getTarifs();
+        for (Tarif t : t1) {
+            t1.remove(t);
         }
-        c.setHoraires(null);
+        c.setTarifs(null);
 
         em.getTransaction().begin();
         em.remove(c);

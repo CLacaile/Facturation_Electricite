@@ -19,8 +19,8 @@ public class Main {
         LocalDate date1 = LocalDate.of(2019, 1, 9);
         LocalDate date2 = LocalDate.of(2019, 1, 10);
         LocalTime time1 = LocalTime.of(10,0);
-        LocalTime time2 = LocalTime.of(15,0);
-        LocalTime time3 = LocalTime.of(19,0);
+        LocalTime debutCreux = LocalTime.of(15,0);
+        LocalTime finCreux = LocalTime.of(19,0);
         LocalTime time4 = LocalTime.of(23, 59);
 
         try {
@@ -28,22 +28,14 @@ public class Main {
             Personne p = PersonneDAO.createPersonne(em, 11111, "0606060606");
             Adresse a = AdresseDAO.createAdresse(em, "Parmentier", "Tours");
             p = PersonneDAO.updateAdresse(em, p, a);
-            Compteur c = CompteurDAO.createCompteur(em, date1, a);
-            CompteurDAO.updatePersonne(em, c, p);
+            Compteur compteur = CompteurDAO.createCompteur(em, date1, a);
+            CompteurDAO.updatePersonne(em, compteur, p);
             System.out.println(PersonneDAO.find(em, 11111).getNumSS());
 
-            // Test of Consommation, Horaires + DAO
-            Consommation cons = ConsommationDAO.createConsommation(em, c);
-            Horaires h1 = HorairesDAO.createHoraires(em, date1, time1, time2);
-            Horaires h2 = HorairesDAO.createHoraires(em, date1, time2, time3);
-            ConsommationDAO.addHoraires(em, cons, h1);
-            ConsommationDAO.addHoraires(em, cons, h2);
-
-            // cree un tarif plein 1 et un tarif creux 1 associés à un tarif 1
-            Tarif tarif1 = TarifDAO.createTarif(em, 1, 0.2, time3, time1);
-            tarif1 = TarifDAO.addHoraires(em, tarif1, h1);
-
-
+            // Test of Consommation + DAO
+            Consommation cons = ConsommationDAO.createConsommation(em, date1, time1, time4, 10, compteur);
+            Tarif tarif1 = TarifDAO.createTarif(em, 1, 0.2, debutCreux, finCreux);
+            cons = ConsommationDAO.addTarif(em, cons, tarif1);
 
         } catch (Exception e){
             e.printStackTrace();
