@@ -61,7 +61,7 @@ public class Main {
             cons2 = ConsommationDAO.addTarif(em, cons2, tarif2);
             cons3 = ConsommationDAO.addTarif(em, cons3, tarif3);
 
-            // Question 2 : combien vaut la conso des compteurs pour la journée date1 ?
+            // Question 1 : Les conso pour un tarif creux donné ?
             ///i) test getTarifByConso
             List<Tarif> tarifsAppliquesACons1 = TarifDAO.getTarifsByConsommation(em, cons1);
             for(Tarif t : tarifsAppliquesACons1) {
@@ -81,6 +81,12 @@ public class Main {
             List<TarifCreux> tcTarif1 = TarifCreuxDAO.getTarifsCreuxByTarif(em, tarif1);
             for(TarifCreux tc : tcTarif1) {
                 System.out.println("Tarif creux #"+tc.getCode()+" a ete cree par tarif1");
+            }
+            ///iv) test getConsommationsByTarifCreux
+            List<Consommation> consoTc1 = ConsommationDAO.getConsommationsByTarifCreux(em, tcTarif1.get(0));
+            System.out.println(consoTc1.size());
+            for(Consommation c : consoTc1) {
+                System.out.println("La conso #"+c.getId()+" connait ce tarif creux mais n'a pas forcement ete applique");
             }
 
         } catch (Exception e){
