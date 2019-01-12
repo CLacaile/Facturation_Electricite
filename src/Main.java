@@ -39,7 +39,8 @@ public class Main {
             ConsommationDAO.addHoraires(em, cons, h1);
             ConsommationDAO.addHoraires(em, cons, h2);
 
-            Tarif tarif1 = TarifDAO.createTarif(em, 1, 0.2, time3, time1);  // cree un tarif plein (id1) et un tarif creux (id2)
+            // cree un tarif plein 1 et un tarif creux 1 associés à un tarif 1
+            Tarif tarif1 = TarifDAO.createTarif(em, 1, 0.2, time3, time1);
             tarif1 = TarifDAO.addHoraires(em, tarif1, h1);
 
 
