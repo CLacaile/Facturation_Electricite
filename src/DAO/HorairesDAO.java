@@ -4,6 +4,7 @@ import MODELE.Consommation;
 import MODELE.Horaires;
 import MODELE.Tarif;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -66,6 +67,21 @@ public class HorairesDAO {
         em.persist(c);
         em.persist(h);
         em.getTransaction().commit();
+        return h;
+    }
+
+
+    /**
+     * Add an horaires to the horaires list of tarif and a tarif to the tarif list of horaires. Uses TarifDAO#addHoraires().
+     * @param em the EntityManager
+     * @param t the Tarif
+     * @param h the Horaires
+     * @return the Tarif
+     * @throws Exception if the tarif is already in the horaires list or if the horaire is already in the tarif list
+     * @see TarifDAO#addHoraires(EntityManager, Tarif, Horaires)
+     */
+    public static Horaires addTarif(EntityManager em, Horaires h, Tarif t) throws Exception{
+        TarifDAO.addHoraires(em, t, h);
         return h;
     }
 

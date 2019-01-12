@@ -57,6 +57,14 @@ public class TarifDAO {
         return tarif;
     }
 
+    /**
+     * Add an horaires to the horaires list of tarif and a tarif to the tarif list of horaires.
+     * @param em the EntityManager
+     * @param t the Tarif
+     * @param h the Horaires
+     * @return the Tarif
+     * @throws Exception if the tarif is already in the horaires list or if the horaire is already in the tarif list
+     */
     public static Tarif addHoraires(EntityManager em, Tarif t, Horaires h) throws Exception {
         if(t.getHoraires().contains(h) == false) {
             // t ne contient pas h
