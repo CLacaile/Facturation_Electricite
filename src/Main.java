@@ -72,6 +72,16 @@ public class Main {
             for(Consommation c : consoDate1) {
                 System.out.println(c.getId());
             }
+            ///iii) test getAllTarifCreux
+            List<TarifCreux> tarifsCreux = TarifCreuxDAO.getAllTarifCreux(em);
+            for(TarifCreux tc : tarifsCreux) {
+                System.out.println("Tarif creux #"+tc.getCode()+" = "+tc.getPrix());
+            }
+            ///iv) test getTarifsCreuxByTarif
+            List<TarifCreux> tcTarif1 = TarifCreuxDAO.getTarifsCreuxByTarif(em, tarif1);
+            for(TarifCreux tc : tcTarif1) {
+                System.out.println("Tarif creux #"+tc.getCode()+" a ete cree par tarif1");
+            }
 
         } catch (Exception e){
             e.printStackTrace();
