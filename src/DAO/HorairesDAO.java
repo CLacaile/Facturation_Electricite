@@ -41,6 +41,20 @@ public class HorairesDAO {
         return h;
     }
 
+    /**
+     * Update the puissance consommee of the horaires
+     * @param em the EntityManager
+     * @param h the horaires to update
+     * @param p the puissance consommee
+     * @return the updated Horaires
+     */
+    public static Horaires updatePuissance(EntityManager em, Horaires h, int p) {
+        h.setPuissance(p);
+        em.getTransaction().begin();
+        em.persist(h);
+        em.getTransaction().commit();
+        return h;
+    }
 
     /**
      * Updates an horaires element in the list of horaires of consommation. If the horaires must either be a new one or
