@@ -76,9 +76,14 @@ public class Main {
             }
 */
             /**
-             * Call the function displayedView
+             * Call the function displayedView to answer the first question
              */
-            displayedView(em, 1);
+            //displayedView(em, 1);
+
+            /**
+             * Call the function displayedView to answer the second question
+             */
+            displayedView(em, 2);
 
         } catch (Exception e){
             e.printStackTrace();
@@ -146,7 +151,7 @@ public class Main {
             str = sc.nextLine();
             LocalDate date = LocalDate.parse(str);
 
-            double coutTotalConso = 0.0; //ConsommationDAO.getPrixConsommationsByCompteurDate(em, CompteurDAO.find(em, numC), date); // => creer CompteurDAO.find(em, numC)
+            double coutTotalConso = 0.0; //ConsommationDAO.getConsommationsByCompteurDate(em, CompteurDAO.find(em, numC), date);
             System.out.println("A la date #" + date + " et pour le compteur #" + numC + ", le cout total des consommations est de " + coutTotalConso + "€.");
         }
         else {
