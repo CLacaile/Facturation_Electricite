@@ -50,4 +50,13 @@ public class Personne {
 
 	public void setAdresse(Adresse adresse) {this.adresse = adresse;}
 
+	/**
+	 * Return a string representation of the personne
+	 * @return a string
+	 */
+	public String toString() {
+		return "Numero de securite sociale : " + numSS
+				+ "; Numero de telephone : " + numTel;
+	}
+
 }

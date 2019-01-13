@@ -62,4 +62,14 @@ public class Compteur {
     public void setConsommations(List<Consommation> consommations) {
         this.consommations = consommations;
     }
+
+	/**
+	 * Return a string representation of the compteur
+	 * @return a string
+	 */
+    public String toString() {
+		return "Numero de compteur : " + numC
+				+ "; Date d'activation : " + date
+				+ "; Adresse : " + adresse.toString();
+	}
 }
