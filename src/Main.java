@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
@@ -60,7 +61,7 @@ public class Main {
             cons1 = ConsommationDAO.addTarif(em, cons1, tarif1);
             cons2 = ConsommationDAO.addTarif(em, cons2, tarif2);
             cons3 = ConsommationDAO.addTarif(em, cons3, tarif3);
-
+/*
             // Question 1 : Les conso pour le tarif creux #10 et #13?
             ///a) getConsomationsByTarif
             Tarif tarif10 = TarifDAO.getTarifByTarifCreux(em, TarifCreuxDAO.find(em, 10));
@@ -73,9 +74,81 @@ public class Main {
             for(Consommation c : consoTarif13) {
                 System.out.println("A la conso #"+c.getId()+" a été appliquée le tarif creux #13");
             }
+*/
+            /**
+             * Call the function displayedView
+             */
+            displayedView(em, 1);
+
         } catch (Exception e){
             e.printStackTrace();
         }
-
     }
+
+    /*public static void displayedView(int numQuestion){
+        Scanner sc = new Scanner(System.in);
+        String str = "";
+        if(numQuestion == 1) {
+            /*TarifCreux tarifCreux = new TarifCreux();
+
+            System.out.println("Tarif creux");
+            System.out.println("Entrez le prix : \n");
+            str = sc.nextLine();
+            tarifCreux.setPrix(Double.parseDouble(str));
+
+            System.out.println("Entrez l'heure de debut (HH:MM) : \n");
+            str = sc.nextLine();
+            tarifCreux.setHeureDeb(LocalTime.parse(str));
+
+            System.out.println("Entrez l'heure de fin (HH:MM) : \n");
+            str = sc.nextLine();
+            tarifCreux.setHeureFin(LocalTime.parse(str));
+
+            System.out.println("Vous avez saisi : " + tarifCreux.toString());
+
+        } else if (numQuestion == 2) {
+            Compteur compteur = new Compteur();
+            System.out.println("Compteur");
+            System.out.println("Entrez le numero du compteur : \n");
+            str = sc.nextLine();
+            Long numC = Long.parseLong(str);
+
+            private LocalDate date;
+
+            System.out.println("Entrez une date (AAAA-MM-JJ) : ");
+            str = sc.nextLine();
+            LocalDate d = LocalDate.parse(str);
+
+        }
+    }*/
+
+    public static void displayedView(EntityManager em, int numQuestion){
+        Scanner sc = new Scanner(System.in);
+        String str = "";
+        if(numQuestion == 1) {
+            // Question 1 : Quelles sont les consommations pour le tarif creux #id?
+            System.out.println("Entrez l'identifiant du tarif choisi : ");
+            str = sc.nextLine();
+            long id = Long.parseLong(str);
+
+            Tarif tarif = TarifDAO.getTarifByTarifCreux(em, TarifCreuxDAO.find(em, id));
+            List<Consommation> consoTarif = ConsommationDAO.getConsommationsByTarif(em, tarif);
+            for(Consommation c : consoTarif) {
+                System.out.println("A la conso #" + c.getId() + " a été appliquée le tarif creux #" + id);
+            }
+
+        } else if (numQuestion == 2) {
+            // Question 2 : Quel est le coût total des consommations du jour #date pour le compteur #numC?
+            System.out.println("Entrez le numéro du compteur choisi : ");
+            str = sc.nextLine();
+            long numC = Long.parseLong(str);
+            System.out.println("Entrez la date choisie sous la forme 'AAAA-MM-JJ' : ");
+            str = sc.nextLine();
+            LocalDate date = LocalDate.parse(str);
+
+            double coutTotalConso = 0.0; //ConsommationDAO.getPrixConsommationsByCompteurDate(em, CompteurDAO.find(em, numC), date); // => creer CompteurDAO.find(em, numC)
+            System.out.println("A la date #" + date + " et pour le compteur #" + numC + ", le cout total des consommations est de " + coutTotalConso + "€.");
+        }
+    }
+
 }
