@@ -1,11 +1,9 @@
 package DAO;
 
-import MODELE.Horaires;
-import MODELE.Tarif;
-import MODELE.TarifCreux;
-import MODELE.TarifPlein;
+import MODELE.*;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -58,39 +56,60 @@ public class TarifDAO {
     }
 
     /**
-     * Add an horaires to the horaires list of tarif and a tarif to the tarif list of horaires.
+     * Add a consommation to the consommation list of tarif and a tarif to the tarif list of consommation.
      * @param em the EntityManager
      * @param t the Tarif
-     * @param h the Horaires
+     * @param c the consommation to add
      * @return the Tarif
      * @throws Exception if the tarif is already in the horaires list or if the horaire is already in the tarif list
      */
-    public static Tarif addHoraires(EntityManager em, Tarif t, Horaires h) throws Exception {
-        if(t.getHoraires().contains(h) == false) {
+    public static Tarif addConsommation(EntityManager em, Tarif t, Consommation c) throws Exception {
+        if(t.getConsommations().contains(c) == false) {
             // t ne contient pas h
-            t.getHoraires().add(h);
+            t.getConsommations().add(c);
         }
         else {
             System.out.println("Le tarif possede deja cet horaire. Abandon.");
             throw new Exception();
         }
-        if(h.getTarifs().contains(t) == false) {
+        if(c.getTarifs().contains(t) == false) {
             // h ne contient pas t
-            h.getTarifs().add(t);
+            c.getTarifs().add(t);
         }
         else {
-            System.out.println("L'horaire connait deja ce tarif. Abandon.");
+            System.out.println("La conso connait deja ce tarif. Abandon.");
             throw new Exception();
         }
         em.getTransaction().begin();
         em.persist(t);
-        em.persist(h);
+        em.persist(c);
         em.getTransaction().commit();
         return t;
     }
 
     /**
-     * Removes the tarif from the tarif creux, tarif plein and horaires associated
+     * Return the tarifs from the db.
+     * @param em the EntityManager
+     * @return the tarifs of the db
+     */
+    public static List<Tarif> getAllTarifs(EntityManager em) {
+        Query query = em.createQuery("select t from Tarif t");
+        return query.getResultList();
+    }
+
+    public static Tarif getTarifByTarifCreux(EntityManager em, TarifCreux tc) {
+        String hql = "select t from TarifCreux tc join tc.tarif t where tc =:tarifCreux";
+        return (Tarif) em.createQuery(hql).setParameter("tarifCreux", tc).getSingleResult();
+
+    }
+
+    public static List<Tarif> getTarifsByConsommation(EntityManager em, Consommation c) {
+        String hql = "select distinct t from Tarif t join t.consommations c where c = :conso";
+        return em.createQuery(hql).setParameter("conso", c).getResultList();
+    }
+
+    /**
+     * Removes the tarif from the tarif creux, tarif plein and consommation associated
      * @param em the EntityManager
      * @param t the tarif to remove
      */
@@ -99,14 +118,16 @@ public class TarifDAO {
         tc.setTarif(null);
         TarifPlein tp = t.getTarifPlein();
         tp.setTarif(null);
-        List<Horaires> h1 = t.getHoraires();
-        for (Horaires h : h1) {
-            h1.remove(h);
+        List<Consommation> c1 = t.getConsommations();
+        for (Consommation c : c1) {
+            c1.remove(c);
         }
-        t.setHoraires(null);
+        t.setConsommations(null);
 
         em.getTransaction().begin();
         em.remove(t);
+        em.remove(tc);
+        em.remove(tp);
         em.getTransaction().commit();
     }
 }

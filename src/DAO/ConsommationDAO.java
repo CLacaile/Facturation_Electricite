@@ -2,11 +2,17 @@ package DAO;
 
 import MODELE.Compteur;
 import MODELE.Consommation;
-import MODELE.Horaires;
+import MODELE.Tarif;
+import MODELE.TarifCreux;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.time.temporal.ChronoUnit.MINUTES;
+
 
 public class ConsommationDAO {
     /**
@@ -23,11 +29,17 @@ public class ConsommationDAO {
      * Create a consommation without horaires but with a compteur in the DB. Use updateHoraires to set the horaires
      * @param em
      * @return the new consommation associated to a compteur
-     * @see CompteurDAO#updateConsommation(EntityManager, Compteur, Consommation)
+     * @see CompteurDAO#addConsommation(EntityManager, Compteur, Consommation)
      */
-    public static Consommation createConsommation(EntityManager em, Compteur c) {
+    public static Consommation createConsommation(EntityManager em, LocalDate date, LocalTime heureDeb, LocalTime heureFin,
+                                                  int puissance, Compteur compteur) {
         Consommation consommation = new Consommation();
-        CompteurDAO.updateConsommation(em, c, consommation);
+        consommation.setDate(date);
+        consommation.setHeureDeb(heureDeb);
+        consommation.setHeureArr(heureFin);
+        consommation.setPuissance(puissance);
+        consommation.setCompteur(compteur);
+        CompteurDAO.addConsommation(em, compteur, consommation);
         return consommation;
     }
 
@@ -35,21 +47,17 @@ public class ConsommationDAO {
      * Add an horaires to the list of horaires in the DB.
      * @param em the EntityManager
      * @param c the consommation
-     * @param h the horaires
+     * @param t the tarif
      * @return the updated consommation
      */
-    public static Consommation addHoraires(EntityManager em, Consommation c, Horaires h) throws IllegalArgumentException {
-        if(c.getHoraires() == null) {
-            System.out.println("Aucune liste d'horaires n'a ete creee. Abandon.");
-            throw new IllegalArgumentException();
-        }
-        c.getHoraires().add(h);
-        h.setConsommation(c);
-        em.getTransaction().begin();
-        em.persist(c);
-        em.persist(h);
-        em.getTransaction().commit();
+    public static Consommation addTarif(EntityManager em, Consommation c, Tarif t) throws Exception {
+        TarifDAO.addConsommation(em, t, c);
         return c;
+    }
+
+    public static List<Consommation> getConsommationsByDate(EntityManager em, LocalDate date) {
+        String hql = "select c from Consommation c where c.date = :d";
+        return em.createQuery(hql).setParameter("d", date).getResultList();
     }
 
     /**
@@ -59,16 +67,75 @@ public class ConsommationDAO {
      */
     public static void removeConsommation(EntityManager em, Consommation c) {
         Compteur c1 = c.getCompteur();
-        c1.setConsommation(null);
-        List<Horaires> h1 = c.getHoraires();
-        for (Horaires h : h1) {
-            h1.remove(h);
+        c1.setConsommations(null);
+        List<Tarif> t1 = c.getTarifs();
+        for (Tarif t : t1) {
+            t1.remove(t);
         }
-        c.setHoraires(null);
+        c.setTarifs(null);
 
         em.getTransaction().begin();
         em.remove(c);
         em.getTransaction().commit();
+    }
+
+    /**
+     * Compute the cost of a consommation at a given date.
+     * @param em the EntityManager
+     * @param c the consommation
+     * @param date the date
+     * @return the cost
+     */
+    public static double computeCost(EntityManager em, Consommation c, LocalDate date) {
+        double cost = 0;
+        List<Tarif> tarifsConso = TarifDAO.getTarifsByConsommation(em, c);
+        for(Tarif t : tarifsConso) {
+            //Compute the cost of t
+            if(c.getHeureDeb().isBefore(t.getTarifPlein().getHeureDeb())
+            && c.getHeureArr().isBefore(t.getTarifCreux().getHeureDeb())) {
+                //Que du tarif creux sur la periode de conso AVANT la periode pleine
+            }
+            else if(c.getHeureDeb().isAfter(t.getTarifPlein().getHeureFin())
+            && c.getHeureArr().isAfter(t.getTarifPlein().getHeureFin())) {
+                //Que du tarif creux sur le periode de conso APRES la periode pleine
+            }
+            else if(c.getHeureDeb().isBefore(t.getTarifPlein().getHeureDeb())
+                    && (c.getHeureArr().isAfter(t.getTarifPlein().getHeureDeb())
+                        && c.getHeureArr().isBefore(t.getTarifPlein().getHeureFin()))) {
+                //La periode de conso commence en tarif creux et fini pdt la periode pleine
+            }
+            else if((c.getHeureDeb().isAfter(t.getTarifPlein().getHeureDeb())
+                    && c.getHeureDeb().isBefore(t.getTarifPlein().getHeureFin()))
+                    && c.getHeureArr().isAfter(t.getTarifPlein().getHeureFin())) {
+                //La periode de conso commence en tarif plein et fini après la periode creuse
+            }
+            else {
+                //Que du tarif plein sur la periode de conso
+            }
+        }
+        return cost;
+    }
+
+    /**
+     * Retrieve from the db a list of consommation where the tarif t is applied
+     * @param em the EntityManager
+     * @param t the tarif t
+     * @return a list of consommation where t is applied
+     */
+    public static List<Consommation> getConsommationsByTarif(EntityManager em, Tarif t) {
+        String hql = "select c from Consommation c join c.tarifs t where t = :tarif";
+        return em.createQuery(hql).setParameter("tarif", t).getResultList();
+    }
+
+    /**
+     * Retrieve from the db a list of consommation where the tarifCreux tc is applied
+     * @param em the EntityManager
+     * @param tc the tarifCreux
+     * @return a list of consommation where tc is applied
+     */
+    public static List<Consommation> getConsommationsByTarifCreux(EntityManager em, TarifCreux tc) {
+        Tarif tarif = TarifDAO.getTarifByTarifCreux(em, tc);
+        return getConsommationsByTarif(em, tarif);
     }
 
 

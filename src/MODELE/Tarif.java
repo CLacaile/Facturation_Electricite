@@ -24,11 +24,8 @@ public class Tarif {
 	private TarifCreux tarifCreux;
 	@OneToOne(mappedBy = "tarif", cascade = CascadeType.ALL)
 	private TarifPlein tarifPlein;
-	@ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "Horaires_Tarif",
-            joinColumns = {@JoinColumn(name = "Tarif_Id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "Horaires_Id", referencedColumnName = "id")})
-	private List<Horaires> horaires = new ArrayList<>();
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "tarifs")
+	private List<Consommation> consommations = new ArrayList<>();
 
 	public double getPrix() {
 		return prix;
@@ -66,12 +63,12 @@ public class Tarif {
 		this.tarifPlein = tarifPlein;
 	}
 
-	public List<Horaires> getHoraires() {
-		return horaires;
+	public List<Consommation> getConsommations() {
+		return consommations;
 	}
 
-	public void setHoraires(List<Horaires> horaires) {
-		this.horaires = horaires;
+	public void setConsommations(List<Consommation> consommations) {
+		this.consommations = consommations;
 	}
 
 

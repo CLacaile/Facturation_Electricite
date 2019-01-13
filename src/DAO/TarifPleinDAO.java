@@ -1,6 +1,5 @@
 package DAO;
 
-import MODELE.Horaires;
 import MODELE.Tarif;
 import MODELE.TarifPlein;
 

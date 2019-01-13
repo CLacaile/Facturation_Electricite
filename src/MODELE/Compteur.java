@@ -2,6 +2,8 @@ package MODELE;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Compteur {
@@ -11,8 +13,8 @@ public class Compteur {
 	private LocalDate date;
 	@OneToOne(mappedBy = "compteur", cascade = CascadeType.ALL)
 	private Adresse adresse;
-	@OneToOne(mappedBy = "compteur", cascade = CascadeType.ALL)
-	private Consommation consommation;
+	@OneToMany(mappedBy = "compteur", cascade = CascadeType.ALL)
+	private List<Consommation> consommations = new ArrayList<>();
 	@OneToOne(cascade = CascadeType.ALL)
 	private Personne personne;
 	
@@ -53,11 +55,11 @@ public class Compteur {
 		this.personne = personne;
 	}
 
-    public Consommation getConsommation() {
-        return consommation;
+    public List<Consommation> getConsommations() {
+        return consommations;
     }
 
-    public void setConsommation(Consommation consommation) {
-        this.consommation = consommation;
+    public void setConsommations(List<Consommation> consommations) {
+        this.consommations = consommations;
     }
 }

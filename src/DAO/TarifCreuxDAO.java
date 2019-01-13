@@ -1,14 +1,19 @@
 package DAO;
 
-import MODELE.Horaires;
 import MODELE.Tarif;
 import MODELE.TarifCreux;
 import net.bytebuddy.asm.Advice;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.time.LocalTime;
+import java.util.List;
 
 public class TarifCreuxDAO {
+
+    public static TarifCreux find(EntityManager em, long id) {
+        return (TarifCreux) em.find(TarifCreux.class, id);
+    }
 
     /**
      * Create a tarif creux in the db
@@ -58,6 +63,16 @@ public class TarifCreuxDAO {
         em.getTransaction().begin();
         em.remove(tc);
         em.getTransaction().commit();
+    }
+
+    public static List<TarifCreux> getAllTarifCreux(EntityManager em) {
+        Query q = em.createQuery("select tc from TarifCreux tc");
+        return q.getResultList();
+    }
+
+    public static List<TarifCreux> getTarifsCreuxByTarif(EntityManager em, Tarif t) {
+        String hql = "select tc from TarifCreux tc where tc.tarif = :tarif";
+        return em.createQuery(hql).setParameter("tarif", t).getResultList();
     }
 
 }
