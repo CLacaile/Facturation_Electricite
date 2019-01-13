@@ -90,43 +90,6 @@ public class Main {
         }
     }
 
-    /*public static void displayedView(int numQuestion){
-        Scanner sc = new Scanner(System.in);
-        String str = "";
-        if(numQuestion == 1) {
-            /*TarifCreux tarifCreux = new TarifCreux();
-
-            System.out.println("Tarif creux");
-            System.out.println("Entrez le prix : \n");
-            str = sc.nextLine();
-            tarifCreux.setPrix(Double.parseDouble(str));
-
-            System.out.println("Entrez l'heure de debut (HH:MM) : \n");
-            str = sc.nextLine();
-            tarifCreux.setHeureDeb(LocalTime.parse(str));
-
-            System.out.println("Entrez l'heure de fin (HH:MM) : \n");
-            str = sc.nextLine();
-            tarifCreux.setHeureFin(LocalTime.parse(str));
-
-            System.out.println("Vous avez saisi : " + tarifCreux.toString());
-
-        } else if (numQuestion == 2) {
-            Compteur compteur = new Compteur();
-            System.out.println("Compteur");
-            System.out.println("Entrez le numero du compteur : \n");
-            str = sc.nextLine();
-            Long numC = Long.parseLong(str);
-
-            private LocalDate date;
-
-            System.out.println("Entrez une date (AAAA-MM-JJ) : ");
-            str = sc.nextLine();
-            LocalDate d = LocalDate.parse(str);
-
-        }
-    }*/
-
     public static void displayedView(EntityManager em, int numQuestion){
         Scanner sc = new Scanner(System.in);
         String str = "";
