@@ -38,6 +38,10 @@ public class CompteurDAO {
         return compteur;
     }
 
+    public static Compteur find(EntityManager em, long id) {
+        return (Compteur) em.find(Compteur.class, id);
+    }
+
     /**
      * Update the personne attribute of a compteur. It also updates the compteur attributes of a personne and the adres-
      * se attribute of the personne to put the same adresse as the compteur
