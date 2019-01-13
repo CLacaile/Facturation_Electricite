@@ -97,6 +97,12 @@ public class TarifDAO {
         return query.getResultList();
     }
 
+    public static Tarif getTarifByTarifCreux(EntityManager em, TarifCreux tc) {
+        Query q = em.createQuery("select t from TarifCreux tc join tc.tarif t where tc =:tarifCreux");
+        return (Tarif) q.getSingleResult();
+
+    }
+
     public static List<Tarif> getTarifsByConsommation(EntityManager em, Consommation c) {
         String hql = "select distinct t from Tarif t join t.consommations c where c = :conso";
         return em.createQuery(hql).setParameter("conso", c).getResultList();
