@@ -50,6 +50,10 @@ public class TarifCreux {
         this.tarif = tarif;
     }
 
+    /**
+     * Return a string representation of the tarifCreux
+     * @return a string
+     */
     public String toString() {
         return "Code : " + this.code
                 + "; Prix : " + this.prix
