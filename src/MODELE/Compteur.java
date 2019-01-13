@@ -70,7 +70,6 @@ public class Compteur {
     public String toString() {
 		return "Numero de compteur : " + numC
 				+ "; Date d'activation : " + date
-				+ "; Adresse : " + adresse.toString()
-				+ "; Personne liée au compteur : " + personne.toString();
+				+ "; Adresse : " + adresse.toString();
 	}
 }
