@@ -61,32 +61,11 @@ public class Main {
             cons2 = ConsommationDAO.addTarif(em, cons2, tarif2);
             cons3 = ConsommationDAO.addTarif(em, cons3, tarif3);
 
-            // Question 1 : Les conso pour un tarif creux donné ?
-            ///i) test getTarifByConso
-            List<Tarif> tarifsAppliquesACons1 = TarifDAO.getTarifsByConsommation(em, cons1);
-            for(Tarif t : tarifsAppliquesACons1) {
-                System.out.println("Tarif #"+t.getId());
-            }
-            ///ii) test getConsommationByDate
-            List<Consommation> consoDate1 = ConsommationDAO.getConsommationsByDate(em, date1);
-            for(Consommation c : consoDate1) {
-                System.out.println(c.getId());
-            }
-            ///iii) test getAllTarifCreux
-            List<TarifCreux> tarifsCreux = TarifCreuxDAO.getAllTarifCreux(em);
-            for(TarifCreux tc : tarifsCreux) {
-                System.out.println("Tarif creux #"+tc.getCode()+" = "+tc.getPrix());
-            }
-            ///iv) test getTarifsCreuxByTarif
-            List<TarifCreux> tcTarif1 = TarifCreuxDAO.getTarifsCreuxByTarif(em, tarif1);
-            for(TarifCreux tc : tcTarif1) {
-                System.out.println("Tarif creux #"+tc.getCode()+" a ete cree par tarif1");
-            }
-            ///iv) test getConsommationsByTarif
-            List<Consommation> consoTarif1 = ConsommationDAO.getConsommationsByTarif(em, tarif1);
-            System.out.println(consoTarif1.size());
-            for(Consommation c : consoTarif1) {
-                System.out.println("La conso #"+c.getId()+" a été appliquée au tarif1");
+            // Question 1 : Les conso pour le tarif creux #10 ?
+            Tarif tarif10 = TarifDAO.getTarifByTarifCreux(em, TarifCreuxDAO.find(em, 10));
+            List<Consommation> consoTarif10 = ConsommationDAO.getConsommationsByTarif(em, tarif10);
+            for(Consommation c : consoTarif10) {
+                System.out.println("La conso #"+c.getId()+" a été appliquée au tarif creux #10");
             }
 
         } catch (Exception e){

@@ -11,6 +11,10 @@ import java.util.List;
 
 public class TarifCreuxDAO {
 
+    public static TarifCreux find(EntityManager em, long id) {
+        return (TarifCreux) em.find(TarifCreux.class, id);
+    }
+
     /**
      * Create a tarif creux in the db
      * @param em
