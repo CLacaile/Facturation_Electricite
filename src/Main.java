@@ -96,43 +96,6 @@ public class Main {
         }
     }
 
-    /*public static void displayedView(int numQuestion){
-        Scanner sc = new Scanner(System.in);
-        String str = "";
-        if(numQuestion == 1) {
-            /*TarifCreux tarifCreux = new TarifCreux();
-
-            System.out.println("Tarif creux");
-            System.out.println("Entrez le prix : \n");
-            str = sc.nextLine();
-            tarifCreux.setPrix(Double.parseDouble(str));
-
-            System.out.println("Entrez l'heure de debut (HH:MM) : \n");
-            str = sc.nextLine();
-            tarifCreux.setHeureDeb(LocalTime.parse(str));
-
-            System.out.println("Entrez l'heure de fin (HH:MM) : \n");
-            str = sc.nextLine();
-            tarifCreux.setHeureFin(LocalTime.parse(str));
-
-            System.out.println("Vous avez saisi : " + tarifCreux.toString());
-
-        } else if (numQuestion == 2) {
-            Compteur compteur = new Compteur();
-            System.out.println("Compteur");
-            System.out.println("Entrez le numero du compteur : \n");
-            str = sc.nextLine();
-            Long numC = Long.parseLong(str);
-
-            private LocalDate date;
-
-            System.out.println("Entrez une date (AAAA-MM-JJ) : ");
-            str = sc.nextLine();
-            LocalDate d = LocalDate.parse(str);
-
-        }
-    }*/
-
     public static void displayedView(EntityManager em, int numQuestion){
         Scanner sc = new Scanner(System.in);
         String str = "";
@@ -153,9 +116,18 @@ public class Main {
             System.out.println("Entrez le numéro du compteur choisi : ");
             str = sc.nextLine();
             long numC = Long.parseLong(str);
-            System.out.println("Entrez la date choisie sous la forme 'AAAA-MM-JJ' : ");
+            System.out.println("Date choisie ");
+            System.out.println("Entrez le jour : \n");
             str = sc.nextLine();
-            LocalDate date = LocalDate.parse(str);
+            int j = Integer.parseInt(str);
+            System.out.println("Entrez le mois : \n");
+            str = sc.nextLine();
+            int m = Integer.parseInt(str);
+            System.out.println("Entrez l'année : \n");
+            str = sc.nextLine();
+            int a = Integer.parseInt(str);
+            LocalDate date = LocalDate.of(a, m, j);
+            System.out.println("Vous avez choisi la date : " + date.getDayOfMonth() + "-" + date.getMonth() + "-" + date.getYear());
 
             double coutTotalConso = 0.0; //ConsommationDAO.getConsommationsByCompteurDate(em, CompteurDAO.find(em, numC), date);
             System.out.println("A la date #" + date + " et pour le compteur #" + numC + ", le cout total des consommations est de " + coutTotalConso + "€.");
