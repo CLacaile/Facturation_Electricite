@@ -62,7 +62,7 @@ public class Adresse {
 	}
 
 	/**
-	 * Return a string representation of the compteur
+	 * Return a string representation of the adresse
 	 * @return a string
 	 */
 	public String toString() {
