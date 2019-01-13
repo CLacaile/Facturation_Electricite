@@ -110,9 +110,18 @@ public class Main {
             System.out.println("Entrez le numéro du compteur choisi : ");
             str = sc.nextLine();
             long numC = Long.parseLong(str);
-            System.out.println("Entrez la date choisie sous la forme 'AAAA-MM-JJ' : ");
+            System.out.println("Date choisie ");
+            System.out.println("Entrez le jour : \n");
             str = sc.nextLine();
-            LocalDate date = LocalDate.parse(str);
+            int j = Integer.parseInt(str);
+            System.out.println("Entrez le mois : \n");
+            str = sc.nextLine();
+            int m = Integer.parseInt(str);
+            System.out.println("Entrez l'année : \n");
+            str = sc.nextLine();
+            int a = Integer.parseInt(str);
+            LocalDate date = LocalDate.of(a, m, j);
+            System.out.println("Vous avez choisi la date : " + date.getDayOfMonth() + "-" + date.getMonth() + "-" + date.getYear());
 
             double coutTotalConso = 0.0; //ConsommationDAO.getConsommationsByCompteurDate(em, CompteurDAO.find(em, numC), date);
             System.out.println("A la date #" + date + " et pour le compteur #" + numC + ", le cout total des consommations est de " + coutTotalConso + "€.");
