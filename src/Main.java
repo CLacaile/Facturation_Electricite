@@ -1,5 +1,7 @@
+import CONTROLEUR.Controleur;
 import DAO.*;
 import MODELE.*;
+import VUE.Vue;
 import net.bytebuddy.asm.Advice;
 
 import javax.persistence.EntityManager;
@@ -83,7 +85,11 @@ public class Main {
             /**
              * Call the function displayedView to answer the second question
              */
-            displayedView(em, 2);
+            //displayedView(em, 2);
+
+            Modele modele = new Modele();
+            Vue vue = new Vue(modele);
+            Controleur controleur = new Controleur(modele, vue);
 
         } catch (Exception e){
             e.printStackTrace();
@@ -157,6 +163,8 @@ public class Main {
         else {
             displayedView(em, numQuestion);
         }
+
+
     }
 
 }
