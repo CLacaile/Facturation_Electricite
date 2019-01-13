@@ -49,4 +49,11 @@ public class TarifPlein {
     public void setTarif(Tarif tarif) {
         this.tarif = tarif;
     }
+
+    public String toString() {
+        return "Code : " + this.code
+                + "; Prix : " + this.prix
+                + "; Heure de debut : " + this.heureDeb
+                + "; Heure de fin : " + this.heureFin;
+    }
 }
