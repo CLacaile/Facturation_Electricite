@@ -98,8 +98,8 @@ public class TarifDAO {
     }
 
     public static Tarif getTarifByTarifCreux(EntityManager em, TarifCreux tc) {
-        Query q = em.createQuery("select t from TarifCreux tc join tc.tarif t where tc =:tarifCreux");
-        return (Tarif) q.getSingleResult();
+        String hql = "select t from TarifCreux tc join tc.tarif t where tc =:tarifCreux";
+        return (Tarif) em.createQuery(hql).setParameter("tarifCreux", tc).getSingleResult();
 
     }
 
