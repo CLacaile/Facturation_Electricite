@@ -103,4 +103,16 @@ public class Consommation {
 	public void setCompteur(Compteur compteur) {
 		this.compteur = compteur;
 	}
+
+	/**
+	 * Return a string representation of the consommation
+	 * @return a string
+	 */
+	public String toString() {
+		return "Identifiant du compteur : " + id
+				+ "; Date : " + date.toString()
+				+ "; Heure de debut : " + heureDeb.toString()
+				+ "; Heure de fin : " + heureArr.toString()
+				+ "; Puissance : " + puissance + "kWh";
+	}
 }
