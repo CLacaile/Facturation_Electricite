@@ -60,4 +60,14 @@ public class Adresse {
 	public void setPersonne(Personne personne) {
 		this.personne = personne;
 	}
+
+	/**
+	 * Return a string representation of the compteur
+	 * @return a string
+	 */
+	public String toString() {
+		return "Identifiant de l'adresse : " + id
+				+ "; Rue : " + rue
+				+ "; Ville : " + ville;
+	}
 }
