@@ -145,11 +145,9 @@ public class ConsommationDAO {
      * @param date the date
      * @return the total cost of the consommations by compteur and date
      */
-    public static double getPrixConsommationsByCompteurDate(EntityManager em, Compteur ct, LocalDate date) {
-        //String hql = "select c from Consommation c join c.compteur ct where ct = :compteur";
-        //return em.createQuery(hql).setParameter("compteur", ct).getResultList();
-        //TODO
-        return 0.0;
+    public static List<Consommation> getConsommationsByCompteurDate(EntityManager em, Compteur ct, LocalDate date) {
+        String hql = "select c from Consommation c join c.compteur ct where c.date = :d";
+        return em.createQuery(hql).setParameter("d", date).getResultList();
     }
 
 }
