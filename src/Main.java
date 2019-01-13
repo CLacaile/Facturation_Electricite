@@ -82,11 +82,11 @@ public class Main {
             for(TarifCreux tc : tcTarif1) {
                 System.out.println("Tarif creux #"+tc.getCode()+" a ete cree par tarif1");
             }
-            ///iv) test getConsommationsByTarifCreux
-            List<Consommation> consoTc1 = ConsommationDAO.getConsommationsByTarifCreux(em, tcTarif1.get(0));
-            System.out.println(consoTc1.size());
-            for(Consommation c : consoTc1) {
-                System.out.println("La conso #"+c.getId()+" connait ce tarif creux mais n'a pas forcement ete applique");
+            ///iv) test getConsommationsByTarif
+            List<Consommation> consoTarif1 = ConsommationDAO.getConsommationsByTarif(em, tarif1);
+            System.out.println(consoTarif1.size());
+            for(Consommation c : consoTarif1) {
+                System.out.println("La conso #"+c.getId()+" a été appliquée au tarif1");
             }
 
         } catch (Exception e){

@@ -117,9 +117,9 @@ public class ConsommationDAO {
     }
 
     //TODO utile ?
-    public static List<Consommation> getConsommationsByTarifCreux(EntityManager em, TarifCreux tc) {
-        String hql = "select c from Consommation c join c.tarifs t join t.tarifCreux tc where tc = :tarifcreux";
-        return em.createQuery(hql).setParameter("tarifcreux", tc).getResultList();
+    public static List<Consommation> getConsommationsByTarif(EntityManager em, Tarif t) {
+        String hql = "select c from Consommation c join c.tarifs t where t = :tarif";
+        return em.createQuery(hql).setParameter("tarif", t).getResultList();
     }
 
 
