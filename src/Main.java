@@ -149,6 +149,9 @@ public class Main {
             double coutTotalConso = 0.0; //ConsommationDAO.getPrixConsommationsByCompteurDate(em, CompteurDAO.find(em, numC), date); // => creer CompteurDAO.find(em, numC)
             System.out.println("A la date #" + date + " et pour le compteur #" + numC + ", le cout total des consommations est de " + coutTotalConso + "€.");
         }
+        else {
+            displayedView(em, numQuestion);
+        }
     }
 
 }
