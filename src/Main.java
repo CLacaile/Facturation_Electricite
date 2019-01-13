@@ -61,13 +61,18 @@ public class Main {
             cons2 = ConsommationDAO.addTarif(em, cons2, tarif2);
             cons3 = ConsommationDAO.addTarif(em, cons3, tarif3);
 
-            // Question 1 : Les conso pour le tarif creux #10 ?
+            // Question 1 : Les conso pour le tarif creux #10 et #13?
+            ///a) getConsomationsByTarif
             Tarif tarif10 = TarifDAO.getTarifByTarifCreux(em, TarifCreuxDAO.find(em, 10));
             List<Consommation> consoTarif10 = ConsommationDAO.getConsommationsByTarif(em, tarif10);
             for(Consommation c : consoTarif10) {
-                System.out.println("La conso #"+c.getId()+" a été appliquée au tarif creux #10");
+                System.out.println("A la conso #"+c.getId()+" a été appliquée le tarif creux #10");
             }
-
+            ///b) getConsommationsByTarifCreux
+            List<Consommation> consoTarif13 = ConsommationDAO.getConsommationsByTarifCreux(em, TarifCreuxDAO.find(em, 13));
+            for(Consommation c : consoTarif13) {
+                System.out.println("A la conso #"+c.getId()+" a été appliquée le tarif creux #13");
+            }
         } catch (Exception e){
             e.printStackTrace();
         }

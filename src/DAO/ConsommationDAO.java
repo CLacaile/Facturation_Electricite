@@ -116,10 +116,26 @@ public class ConsommationDAO {
         return cost;
     }
 
-    //TODO utile ?
+    /**
+     * Retrieve from the db a list of consommation where the tarif t is applied
+     * @param em the EntityManager
+     * @param t the tarif t
+     * @return a list of consommation where t is applied
+     */
     public static List<Consommation> getConsommationsByTarif(EntityManager em, Tarif t) {
         String hql = "select c from Consommation c join c.tarifs t where t = :tarif";
         return em.createQuery(hql).setParameter("tarif", t).getResultList();
+    }
+
+    /**
+     * Retrieve from the db a list of consommation where the tarifCreux tc is applied
+     * @param em the EntityManager
+     * @param tc the tarifCreux
+     * @return a list of consommation where tc is applied
+     */
+    public static List<Consommation> getConsommationsByTarifCreux(EntityManager em, TarifCreux tc) {
+        Tarif tarif = TarifDAO.getTarifByTarifCreux(em, tc);
+        return getConsommationsByTarif(em, tarif);
     }
 
 
