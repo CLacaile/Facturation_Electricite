@@ -29,6 +29,27 @@ public class Controleur {
         this.vue.displayMenu();
         String cmd = this.vue.scanCommand();
         if (cmd.equals("1")) {
+            List<Compteur> compteurs = CompteurDAO.getAllCompteur(this.em);
+            this.vue.display("======= Liste des compteurs =======");
+            for(Compteur c : compteurs) {
+                this.vue.display(c.toString());
+            }
+        }
+        else if (cmd.equals("2")) {
+            List<Tarif> tarifs = TarifDAO.getAllTarifs(this.em);
+            this.vue.display("======= Liste des tarifs =======");
+            for(Tarif t : tarifs) {
+                this.vue.display(t.toString());
+            }
+        }
+        else if (cmd.equals("3")) {
+            List<TarifCreux> tarifsCreux = TarifCreuxDAO.getAllTarifCreux(this.em);
+            this.vue.display("======= Liste des tarifs creux =======");
+            for(TarifCreux tc : tarifsCreux) {
+                this.vue.display(tc.toString());
+            }
+        }
+        else if (cmd.equals("4")) {
             //Question 1 : liste des consommation pour un tarif creux
             this.vue.display("Entrez un id de tarif creux : ");
             int id = Integer.parseInt(this.vue.scanCommand());
@@ -36,7 +57,7 @@ public class Controleur {
             for(Consommation c : consommations) {
                 this.vue.display(c.toString());
             }
-        } else if (cmd.equals("2")) {
+        } else if (cmd.equals("5")) {
             // Question 2
             this.vue.display("Entrez un compteur : ");
             int cmptr = this.vue.scanInteger();

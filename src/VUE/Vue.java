@@ -22,8 +22,11 @@ public class Vue {
     public void displayMenu() {
         System.out.println("========= Facturation Electricite =========");
         System.out.println("Entrez votre choix: ");
-        System.out.println("1. Verifier a quelle consommation a ete applique un tarif creux");
-        System.out.println("2. Calculer le cout des consommations d'un compteur a une date");
+        System.out.println("1. Lister les compteurs");
+        System.out.println("2. Lister les tarifs");
+        System.out.println("3. Lister les tarifs creux");
+        System.out.println("4. Verifier a quelle(s) consommation(s) a ete applique un tarif creux");
+        System.out.println("5. Calculer le cout des consommations d'un compteur a une date");
     }
 
     /**

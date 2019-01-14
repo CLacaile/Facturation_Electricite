@@ -5,6 +5,7 @@ import MODELE.Consommation;
 import MODELE.Personne;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -39,8 +40,24 @@ public class CompteurDAO {
         return compteur;
     }
 
+    /**
+     * Recuperer un compteur d'id "id" dans la base de donnees
+     * @param em the EntityManager
+     * @param id l'id du compteur a recuperer
+     * @return le compteur
+     */
     public static Compteur find(EntityManager em, long id) {
         return (Compteur) em.find(Compteur.class, id);
+    }
+
+    /**
+     * Recuperer tous les compteurs de la base de donnees
+     * @param em the EntityManager
+     * @return la liste de tous les commpteurs de la bdd
+     */
+    public static List<Compteur> getAllCompteur(EntityManager em) {
+        Query query = em.createQuery("select c from Compteur c");
+        return query.getResultList();
     }
 
     /**
