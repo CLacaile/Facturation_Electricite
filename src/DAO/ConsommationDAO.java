@@ -83,10 +83,9 @@ public class ConsommationDAO {
      * Compute the cost of a consommation at a given date.
      * @param em the EntityManager
      * @param c the consommation
-     * @param date the date
      * @return the cost
      */
-    public static double computeCost(EntityManager em, Consommation c, LocalDate date) {
+    public static double computeCost(EntityManager em, Consommation c) {
         double cost = 0;
         List<Tarif> tarifsConso = TarifDAO.getTarifsByConsommation(em, c);
         for(Tarif t : tarifsConso) {
@@ -94,6 +93,10 @@ public class ConsommationDAO {
             if(c.getHeureDeb().isBefore(t.getTarifPlein().getHeureDeb())
             && c.getHeureArr().isBefore(t.getTarifCreux().getHeureDeb())) {
                 //Que du tarif creux sur la periode de conso AVANT la periode pleine
+                System.out.println("QUE DU CREUX");
+                long minutesConso = c.getHeureDeb().until(c.getHeureArr(), MINUTES);
+                double tarifParMinute = t.getTarifCreux().getPrix()/60;
+                cost = minutesConso * tarifParMinute;
             }
             else if(c.getHeureDeb().isAfter(t.getTarifPlein().getHeureFin())
             && c.getHeureArr().isAfter(t.getTarifPlein().getHeureFin())) {

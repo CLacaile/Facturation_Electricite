@@ -22,6 +22,7 @@ public class Main {
         LocalDate date1 = LocalDate.of(2019, 1, 9);
         LocalDate date2 = LocalDate.of(2019, 1, 10);
         LocalTime time1 = LocalTime.of(10,0);
+        LocalTime time2 = LocalTime.of(14,59);
         LocalTime debutCreux = LocalTime.of(19,0);
         LocalTime finCreux = LocalTime.of(15,0);
         LocalTime time4 = LocalTime.of(23, 59);
@@ -48,7 +49,7 @@ public class Main {
             CompteurDAO.updatePersonne(em, compteur2, p2);
             CompteurDAO.updatePersonne(em, compteur3, p3);
 
-            Consommation cons1 = ConsommationDAO.createConsommation(em, date1, time1, time4, 10, compteur1);
+            Consommation cons1 = ConsommationDAO.createConsommation(em, date1, time1, time2, 10, compteur1);
             Consommation cons2 = ConsommationDAO.createConsommation(em, date1, time1, time4, 20, compteur1);
             Consommation cons3 = ConsommationDAO.createConsommation(em, date1, time1, time4, 30, compteur1);
 
@@ -86,6 +87,10 @@ public class Main {
              * Call the function displayedView to answer the second question
              */
             //displayedView(em, 2);
+
+            // Question 2 : Le cout des conso d'un compteur à une date donnée
+            ///i) Le cout d'une consommation donnée
+            System.out.println("Cout de la consommation 1: "+ConsommationDAO.computeCost(em, cons1));
 
             Modele modele = new Modele();
             Vue vue = new Vue(modele);
