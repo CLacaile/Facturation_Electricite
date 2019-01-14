@@ -131,7 +131,7 @@ public class TarifDAO {
         tp.setTarif(null);
         List<Consommation> c1 = t.getConsommations();
         for (Consommation c : c1) {
-            c1.remove(c);
+            c.getTarifs().remove(t);
         }
         t.setConsommations(null);
 
@@ -139,6 +139,9 @@ public class TarifDAO {
         em.remove(t);
         em.remove(tc);
         em.remove(tp);
+        for(Consommation c : c1) {
+            em.persist(c);
+        }
         em.getTransaction().commit();
     }
 }
