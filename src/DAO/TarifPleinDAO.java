@@ -30,7 +30,7 @@ public class TarifPleinDAO {
     /**
      * Update a tarif attibute of the tarif plein and the tarif plein attribute of a tarif in the db
      * @param em
-     * @param tarifCreuxToUpdate
+     * @param tarifPleinToUpdate
      * @param tarifToUpdate
      * @return
      */
