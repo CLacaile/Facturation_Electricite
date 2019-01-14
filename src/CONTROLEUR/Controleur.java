@@ -7,6 +7,7 @@ import VUE.Vue;
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 public class Controleur {
     private Vue vue;
@@ -30,8 +31,10 @@ public class Controleur {
             //Question 1 : liste des consommation pour un tarif creux
             this.vue.display("Entrez un id de tarif creux : ");
             int id = Integer.parseInt(this.vue.scanCommand());
-            System.out.println(id);
-            this.vue.displayConsommations(ConsommationDAO.getConsommationsByTarifCreux(this.em, TarifCreuxDAO.find(this.em, id)));
+            List<Consommation> consommations = ConsommationDAO.getConsommationsByTarifCreux(this.em, TarifCreuxDAO.find(this.em, id));
+            for(Consommation c : consommations) {
+                this.vue.display(c.toString());
+            }
         } else if (cmd.equals("2")) {
             // Question 2
             this.vue.display("Entrez un compteur : ");
