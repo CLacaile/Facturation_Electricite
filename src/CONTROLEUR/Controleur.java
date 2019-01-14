@@ -49,10 +49,10 @@ public class Controleur {
     /**
      * Populate the MySQL DB by creating 3 personnes, 3 compteurs, 3 adresses, 3 consommations and 3 tarifs like so :
      * - the tarifs : plein tarif between 15:00 and 19:00 + prix is respectively 1€, 2€, 3€ + reduction 10%, 20%, 30%
-     * - conso1 on the 2019-01-09 from 10:00 to 18:00 for a puissance of 100kWh
-     * - conso2 on the 2019-01-09 from 22:00 to 23:59 for a puissance of 100kWh
-     * - conso3 on the 2019-01-09 from 10:00 to 23:59 for a puissance of 100kWh
-     * It uses DAO functions to do so.
+     * - conso1 on the 2019-01-09 from 10:00 to 18:00 for a puissance of 100kWh with tarif1 and tarif2
+     * - conso2 on the 2019-01-09 from 22:00 to 23:59 for a puissance of 100kWh with tarif2
+     * - conso3 on the 2019-01-09 from 10:00 to 23:59 for a puissance of 100kWh with tarif3
+     * It uses DAO functions to do so with the EntityManager em attributes
      */
     public void populateDB() {
         LocalDate date1 = LocalDate.of(2019, 1, 9);
