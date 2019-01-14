@@ -21,7 +21,7 @@ public class Main {
 
         LocalDate date1 = LocalDate.of(2019, 1, 9);
         LocalDate date2 = LocalDate.of(2019, 1, 10);
-        LocalTime time1 = LocalTime.of(10,0);
+        LocalTime time1 = LocalTime.of(18,0);
         LocalTime time2 = LocalTime.of(22,0);
         LocalTime debutCreux = LocalTime.of(19,0);
         LocalTime finCreux = LocalTime.of(15,0);
@@ -49,17 +49,18 @@ public class Main {
             CompteurDAO.updatePersonne(em, compteur2, p2);
             CompteurDAO.updatePersonne(em, compteur3, p3);
 
-            Consommation cons1 = ConsommationDAO.createConsommation(em, date1, time1, time2, 10, compteur1);
-            Consommation cons2 = ConsommationDAO.createConsommation(em, date1, time1, time4, 20, compteur1);
-            Consommation cons3 = ConsommationDAO.createConsommation(em, date1, time1, time4, 30, compteur1);
+            Consommation cons1 = ConsommationDAO.createConsommation(em, date1, time1, time2, 100, compteur1);
+            Consommation cons2 = ConsommationDAO.createConsommation(em, date1, time2, time4, 200, compteur1);
+            Consommation cons3 = ConsommationDAO.createConsommation(em, date1, time1, time4, 300, compteur1);
 
             compteur1 = CompteurDAO.addConsommation(em, compteur1, cons1);
+            //compteur1 = CompteurDAO.addConsommation(em, compteur1, cons2);
             compteur2 = CompteurDAO.addConsommation(em, compteur2, cons2);
             compteur3 = CompteurDAO.addConsommation(em, compteur3, cons3);
 
-            Tarif tarif1 = TarifDAO.createTarif(em, 1, 0.11, debutCreux, finCreux);
-            Tarif tarif2 = TarifDAO.createTarif(em, 2, 0.22, debutCreux, finCreux);
-            Tarif tarif3 = TarifDAO.createTarif(em, 3, 0.33, debutCreux, finCreux);
+            Tarif tarif1 = TarifDAO.createTarif(em, 1, 0.1, debutCreux, finCreux);
+            Tarif tarif2 = TarifDAO.createTarif(em, 2, 0.2, debutCreux, finCreux);
+            Tarif tarif3 = TarifDAO.createTarif(em, 3, 0.3, debutCreux, finCreux);
 
             cons1 = ConsommationDAO.addTarif(em, cons1, tarif1);
             //cons1 = ConsommationDAO.addTarif(em, cons1, tarif2);
@@ -90,8 +91,8 @@ public class Main {
             //displayedView(em, 2);
 
             // Question 2 : Le cout des conso d'un compteur à une date donnée
-            ///i) Le cout d'une consommation donnée
-            System.out.println("Cout de la consommation 1: "+ConsommationDAO.computeCost(em, cons1));
+            System.out.println("Cout de cons1 : "+ ConsommationDAO.computeCost(em, cons1));
+            //System.out.println(CompteurDAO.computeCost(em, compteur1, date1));
 
             Modele modele = new Modele();
             Vue vue = new Vue(modele);

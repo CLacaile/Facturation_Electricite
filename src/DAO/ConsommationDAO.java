@@ -95,9 +95,7 @@ public class ConsommationDAO {
             || (c.getHeureDeb().isAfter(t.getTarifPlein().getHeureFin())
                     && c.getHeureArr().isAfter(t.getTarifPlein().getHeureFin()))) {
                 //Que du tarif creux sur la periode de conso AVANT ou APRES la periode pleine
-                long minutesConso = c.getHeureDeb().until(c.getHeureArr(), MINUTES);
-                double tarifParMinute = t.getTarifCreux().getPrix()/60;
-                cost += minutesConso * tarifParMinute;
+                cost += c.getPuissance() * t.getTarifCreux().getPrix(); // puissance consommée (kWh) * prix/kWh
             }
             else if(c.getHeureDeb().isBefore(t.getTarifPlein().getHeureDeb())
                     && (c.getHeureArr().isAfter(t.getTarifPlein().getHeureDeb())
@@ -105,9 +103,10 @@ public class ConsommationDAO {
                 //La periode de conso commence en tarif creux et fini pdt la periode pleine
                 long minutesCreux = c.getHeureDeb().until(t.getTarifPlein().getHeureDeb(), MINUTES);
                 long minutesPlein = t.getTarifPlein().getHeureDeb().until(c.getHeureArr(), MINUTES);
-                double tarifCreuxParMin = t.getTarifCreux().getPrix()/60;
-                double tarifPleinParMin = t.getTarifPlein().getPrix()/60;
-                cost += minutesCreux*tarifCreuxParMin + minutesPlein*tarifPleinParMin;
+                double puissParMinutes = ((double) c.getPuissance())/(minutesCreux+minutesPlein);
+                double puissCreux = puissParMinutes*minutesCreux;
+                double puissPlein = puissParMinutes*minutesPlein;
+                cost += puissCreux*t.getTarifCreux().getPrix() + puissPlein*t.getTarifPlein().getPrix();
             }
             else if((c.getHeureDeb().isAfter(t.getTarifPlein().getHeureDeb())
                     && c.getHeureDeb().isBefore(t.getTarifPlein().getHeureFin()))
@@ -115,9 +114,10 @@ public class ConsommationDAO {
                 //La periode de conso commence en tarif plein et fini après la periode creuse
                 long minutesPlein = c.getHeureDeb().until(t.getTarifPlein().getHeureFin(), MINUTES);
                 long minutesCreux = t.getTarifPlein().getHeureFin().until(c.getHeureArr(), MINUTES);
-                double tarifCreuxParMin = t.getTarifCreux().getPrix()/60;
-                double tarifPleinParMin = t.getTarifPlein().getPrix()/60;
-                cost += minutesCreux*tarifCreuxParMin + minutesPlein*tarifPleinParMin;
+                double puissParMinutes = ((double) c.getPuissance())/(minutesCreux+minutesPlein);
+                double puissCreux = puissParMinutes*minutesCreux;
+                double puissPlein = puissParMinutes*minutesPlein;
+                cost += puissCreux*t.getTarifCreux().getPrix() + puissPlein*t.getTarifPlein().getPrix();
             }
             else if((c.getHeureDeb().isBefore(t.getTarifPlein().getHeureDeb()))
                     && c.getHeureArr().isAfter(t.getTarifPlein().getHeureFin())) {
@@ -125,15 +125,14 @@ public class ConsommationDAO {
                 long minutesCreux = c.getHeureDeb().until(t.getTarifPlein().getHeureDeb(), MINUTES)
                         + t.getTarifPlein().getHeureFin().until(c.getHeureArr(), MINUTES);
                 long minutesPlein = t.getTarifPlein().getHeureDeb().until(t.getTarifPlein().getHeureFin(), MINUTES);
-                double tarifCreuxParMin = t.getTarifCreux().getPrix()/60;
-                double tarifPleinParMin = t.getTarifPlein().getPrix()/60;
-                cost += minutesCreux*tarifCreuxParMin + minutesPlein*tarifPleinParMin;
+                double puissParMinutes = ((double) c.getPuissance())/(minutesCreux+minutesPlein);
+                double puissCreux = puissParMinutes*minutesCreux;
+                double puissPlein = puissParMinutes*minutesPlein;
+                cost += puissCreux*t.getTarifCreux().getPrix() + puissPlein*t.getTarifPlein().getPrix();
             }
             else {
                 //Que du tarif plein sur la periode de conso
-                long minutesConso = c.getHeureDeb().until(c.getHeureArr(), MINUTES);
-                double tarifParMinute = t.getTarifPlein().getPrix()/60;
-                cost += minutesConso * tarifParMinute;
+                cost += c.getPuissance() * t.getTarifPlein().getPrix();
             }
         }
         return cost;
