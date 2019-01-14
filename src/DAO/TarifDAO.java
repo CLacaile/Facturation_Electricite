@@ -10,7 +10,7 @@ import java.util.List;
 public class TarifDAO {
 
     /**
-     * Find a tarif in the DB
+     * Trouve un tarif dans la base de données.
      * @param em the EntityManager
      * @param id the id
      * @return the Tarif or null if it doesn't exist
@@ -20,8 +20,7 @@ public class TarifDAO {
     }
 
     /**
-     * Create a tarif with a tarif creux and a tarif plein with a prix/kWh and a reduction for tarif creux
-     * in the database. It also defines a
+     * Crée un tarif avec un tarif creux, un tarif plein, un prix/kWh et une reduction pour le tarif creux dans la base de données.
      * @param em the EntityManager
      * @param prix the prix/kWh of the tarif
      * @param reduction the reduction between 0 and 1 (ex: 2O% of reduction applied to 1€ = 0.8€)
@@ -56,7 +55,7 @@ public class TarifDAO {
     }
 
     /**
-     * Add a consommation to the consommation list of tarif and a tarif to the tarif list of consommation.
+     * Ajoute une consommation à la liste des consommations d'un tarif et un tarif à la liste des tarifs d'une consommation.
      * @param em the EntityManager
      * @param t the Tarif
      * @param c the consommation to add
@@ -88,7 +87,7 @@ public class TarifDAO {
     }
 
     /**
-     * Return the tarifs from the db.
+     * Donne tous les tarifs de la base de données.
      * @param em the EntityManager
      * @return the tarifs of the db
      */
@@ -97,19 +96,31 @@ public class TarifDAO {
         return query.getResultList();
     }
 
+    /**
+     * Donne le tarif d'un tarif creux
+     * @param em
+     * @param tc
+     * @return
+     */
     public static Tarif getTarifByTarifCreux(EntityManager em, TarifCreux tc) {
         String hql = "select t from TarifCreux tc join tc.tarif t where tc =:tarifCreux";
         return (Tarif) em.createQuery(hql).setParameter("tarifCreux", tc).getSingleResult();
 
     }
 
+    /**
+     * Donne la liste des tarifs d'une consommation.
+     * @param em
+     * @param c
+     * @return
+     */
     public static List<Tarif> getTarifsByConsommation(EntityManager em, Consommation c) {
         String hql = "select distinct t from Tarif t join t.consommations c where c = :conso";
         return em.createQuery(hql).setParameter("conso", c).getResultList();
     }
 
     /**
-     * Removes the tarif from the tarif creux, tarif plein and consommation associated
+     * Supprime le tarif des tarif creux, tarif plein et consommation associés.
      * @param em the EntityManager
      * @param t the tarif to remove
      */
