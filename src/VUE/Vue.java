@@ -1,8 +1,6 @@
 package VUE;
 
-import CONTROLEUR.Controleur;
 import MODELE.Consommation;
-import MODELE.Modele;
 
 import java.time.LocalDate;
 import java.util.List;
