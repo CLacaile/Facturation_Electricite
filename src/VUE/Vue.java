@@ -44,7 +44,6 @@ public class Vue {
         }
     }
 
-
     public int scanInteger() {
         String str = scanCommand();
         int res = 0;
@@ -59,18 +58,16 @@ public class Vue {
     public double scanDouble() {
         System.out.print(">> ");
         Scanner sc = new Scanner(System.in);
-        String str = sc.nextLine();
+        String str = scanCommand();
         double res = Double.parseDouble(str);
-        sc.close();
         return res;
     }
 
     public LocalDate scanDate() {
         System.out.print(">> ");
         Scanner sc = new Scanner(System.in);
-        String str = sc.nextLine();
+        String str = scanCommand();
         LocalDate date = LocalDate.parse(str);
-        sc.close();
         return date;
     }
 
@@ -80,9 +77,9 @@ public class Vue {
         String str = "";
         while(sc.hasNextLine()) {
             str = sc.nextLine();
+            return str;
         }
-        sc.close();
-        return str;
+        return null;
     }
 
 }
