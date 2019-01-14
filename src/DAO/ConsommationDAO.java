@@ -115,6 +115,12 @@ public class ConsommationDAO {
                     && c.getHeureDeb().isBefore(t.getTarifPlein().getHeureFin()))
                     && c.getHeureArr().isAfter(t.getTarifPlein().getHeureFin())) {
                 //La periode de conso commence en tarif plein et fini après la periode creuse
+                System.out.println("DEBUT PLEIN FIN CREUX");
+                long minutesPlein = c.getHeureDeb().until(t.getTarifPlein().getHeureFin(), MINUTES);
+                long minutesCreux = t.getTarifPlein().getHeureFin().until(c.getHeureArr(), MINUTES);
+                double tarifCreuxParMin = t.getTarifCreux().getPrix()/60;
+                double tarifPleinParMin = t.getTarifPlein().getPrix()/60;
+                cost += minutesCreux*tarifCreuxParMin + minutesPlein*tarifPleinParMin;
             }
             else {
                 //Que du tarif plein sur la periode de conso
