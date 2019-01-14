@@ -14,7 +14,7 @@ public class Vue {
     }
 
     /**
-     * Affiche un menu dans la console de la manière suivante :
+     * Affiche un menu dans la console de la maniere suivante :
      *  Entrez votre choix
      *  1. Verifier a quelle consommation a ete applique un tarif creux
      *  2. Calculer le cout des consommations d'un compteur a une date
@@ -26,7 +26,7 @@ public class Vue {
     }
 
     /**
-     * Affiche une chaîne de caractères dans la console.
+     * Affiche une chaine de caracteres dans la console.
      * @param s the string to display in the console
      */
     public void display(String s) {
@@ -34,7 +34,7 @@ public class Vue {
     }
 
     /**
-     * Affiche un coût dans la console de la manière suivante :
+     * Affiche un cout dans la console de la maniere suivante :
      *  Le cout est de: xxx
      * @param cost the cost to display in the console
      */
@@ -43,7 +43,7 @@ public class Vue {
     }
 
     /**
-     * Scanne la console pour un entier entré par l'utilisateur depuis la console en utilisant scanCommand().
+     * Scanne la console pour un entier entre par l'utilisateur depuis la console en utilisant scanCommand().
      * @return the integer typed in by the user in the console
      */
     public int scanInteger() {
@@ -58,7 +58,7 @@ public class Vue {
     }
 
     /**
-     * Scanne la console pour un double entré par l'utilisateur depuis la console en utilisant scanCommand().
+     * Scanne la console pour un double entre par l'utilisateur depuis la console en utilisant scanCommand().
      * @return the double typed in by the user in the console
      */
     public double scanDouble() {
@@ -70,7 +70,7 @@ public class Vue {
     }
 
     /**
-     * Scanne la console pour une date de type YYYY-MM-DD entrée par l'utilisateur depuis la console en utilisant scanCommand().
+     * Scanne la console pour une date de type YYYY-MM-DD entree par l'utilisateur depuis la console en utilisant scanCommand().
      * @return the LocalDate parsed from the console
      */
     public LocalDate scanDate() {
@@ -82,7 +82,7 @@ public class Vue {
     }
 
     /**
-     * Scanne la console pour une entrée de l'utilisateur depuis la console.
+     * Scanne la console pour une entree de l'utilisateur depuis la console.
      * @return the string input by the user
      */
     public String scanCommand() {
