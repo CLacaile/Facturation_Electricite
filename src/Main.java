@@ -50,11 +50,11 @@ public class Main {
             CompteurDAO.updatePersonne(em, compteur3, p3);
 
             Consommation cons1 = ConsommationDAO.createConsommation(em, date1, time1, time2, 100, compteur1);
-            Consommation cons2 = ConsommationDAO.createConsommation(em, date1, time2, time4, 200, compteur1);
-            Consommation cons3 = ConsommationDAO.createConsommation(em, date1, time1, time4, 300, compteur1);
+            Consommation cons2 = ConsommationDAO.createConsommation(em, date1, time2, time4, 100, compteur1);
+            Consommation cons3 = ConsommationDAO.createConsommation(em, date1, time1, time4, 100, compteur1);
 
             compteur1 = CompteurDAO.addConsommation(em, compteur1, cons1);
-            //compteur1 = CompteurDAO.addConsommation(em, compteur1, cons2);
+            compteur1 = CompteurDAO.addConsommation(em, compteur1, cons2);
             compteur2 = CompteurDAO.addConsommation(em, compteur2, cons2);
             compteur3 = CompteurDAO.addConsommation(em, compteur3, cons3);
 
@@ -63,7 +63,7 @@ public class Main {
             Tarif tarif3 = TarifDAO.createTarif(em, 3, 0.3, debutCreux, finCreux);
 
             cons1 = ConsommationDAO.addTarif(em, cons1, tarif1);
-            //cons1 = ConsommationDAO.addTarif(em, cons1, tarif2);
+            cons1 = ConsommationDAO.addTarif(em, cons1, tarif2);
             cons2 = ConsommationDAO.addTarif(em, cons2, tarif2);
             cons3 = ConsommationDAO.addTarif(em, cons3, tarif3);
 /*
@@ -92,10 +92,10 @@ public class Main {
 
             // Question 2 : Le cout des conso d'un compteur à une date donnée
             System.out.println("Cout de cons1 : "+ ConsommationDAO.computeCost(em, cons1));
-            //System.out.println(CompteurDAO.computeCost(em, compteur1, date1));
+            System.out.println("Cout total du compteur 1 au 09-01: "+CompteurDAO.computeCost(em, compteur1, date1));
 
             Modele modele = new Modele();
-            Vue vue = new Vue(modele);
+            Vue vue = new Vue();
             Controleur controleur = new Controleur(modele, vue);
 
         } catch (Exception e){

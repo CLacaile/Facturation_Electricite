@@ -6,10 +6,8 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Vue {
-    private Modele modele;
 
-    public Vue(Modele m) {
-        this.modele = m;
+    public Vue() {
         System.out.println("========= Facturation Electricite =========");
         int choix = displayMenu();
     }
