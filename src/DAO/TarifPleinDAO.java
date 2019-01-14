@@ -9,7 +9,7 @@ import java.time.LocalTime;
 public class TarifPleinDAO {
 
     /**
-     * Create a tarif plein in the db
+     * Crée un tarif plein dans la base de données.
      * @param em the EntityManager
      * @param prix the prix of the tarif plein
      * @param heureDeb the time of beggining of the plein period (should be the time of end of the creux period)
@@ -28,7 +28,7 @@ public class TarifPleinDAO {
     }
 
     /**
-     * Update a tarif attibute of the tarif plein and the tarif plein attribute of a tarif in the db
+     * Met à jour l'attribut tarif d'un tarif plein et l'attribut tarif plein d'un tarif dans la base de données.
      * @param em
      * @param tarifPleinToUpdate
      * @param tarifToUpdate
@@ -45,7 +45,7 @@ public class TarifPleinDAO {
     }
 
     /**
-     * Removes the tarif plein from the tarif associated
+     * Supprime le tarif plein du tarif associé.
      * @param em the EntityManager
      * @param tp the tarif plein to remove
      */
