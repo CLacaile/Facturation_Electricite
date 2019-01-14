@@ -12,7 +12,7 @@ import java.util.List;
 public class TarifCreuxDAO {
 
     /**
-     * Trouve un tarif creux dans la base de données.
+     * Trouve un tarif creux dans la base de donnees.
      * @param em
      * @param id
      * @return le tarif creux
@@ -22,7 +22,7 @@ public class TarifCreuxDAO {
     }
 
     /**
-     * Crée un tarif creux dans la base de données.
+     * Cree un tarif creux dans la base de donnees.
      * @param em
      * @param prix
      * @param heureDeb
@@ -41,7 +41,7 @@ public class TarifCreuxDAO {
     }
 
     /**
-     * Met à jour l'attribut tarif d'un tarif creux et l'attribut tarif creux d'un tarif dans la base de données.
+     * Met a jour l'attribut tarif d'un tarif creux et l'attribut tarif creux d'un tarif dans la base de donnees.
      * @param em
      * @param tarifCreuxToUpdate
      * @param tarifToUpdate
@@ -58,7 +58,7 @@ public class TarifCreuxDAO {
     }
 
     /**
-     * Supprime un tarif creux du tarif associé.
+     * Supprime un tarif creux du tarif associe.
      * @param em the EntityManager
      * @param tc the tarif creux to remove
      */
@@ -72,7 +72,7 @@ public class TarifCreuxDAO {
     }
 
     /**
-     * Donne la liste de tous les tarifs creux de la base de données.
+     * Donne la liste de tous les tarifs creux de la base de donnees.
      * @param em
      * @return
      */
@@ -82,7 +82,7 @@ public class TarifCreuxDAO {
     }
 
     /**
-     * Donne la liste de tous les tarifs creux de la base de données, selon un tarif donné.
+     * Donne la liste de tous les tarifs creux de la base de donnees, selon un tarif donne.
      * @param em
      * @param t
      * @return

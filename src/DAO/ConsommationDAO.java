@@ -123,7 +123,7 @@ public class ConsommationDAO {
             else if((c.getHeureDeb().isAfter(t.getTarifPlein().getHeureDeb())
                     && c.getHeureDeb().isBefore(t.getTarifPlein().getHeureFin()))
                     && c.getHeureArr().isAfter(t.getTarifPlein().getHeureFin())) {
-                //La periode de conso commence en tarif plein et fini après la periode creuse
+                //La periode de conso commence en tarif plein et fini apres la periode creuse
                 long minutesPlein = c.getHeureDeb().until(t.getTarifPlein().getHeureFin(), MINUTES);
                 long minutesCreux = t.getTarifPlein().getHeureFin().until(c.getHeureArr(), MINUTES);
                 double puissParMinutes = ((double) c.getPuissance())/(minutesCreux+minutesPlein);
@@ -133,7 +133,7 @@ public class ConsommationDAO {
             }
             else if((c.getHeureDeb().isBefore(t.getTarifPlein().getHeureDeb()))
                     && c.getHeureArr().isAfter(t.getTarifPlein().getHeureFin())) {
-                // La periode commence avant la periode pleine et fini après la periode pleine
+                // La periode commence avant la periode pleine et fini apres la periode pleine
                 long minutesCreux = c.getHeureDeb().until(t.getTarifPlein().getHeureDeb(), MINUTES)
                         + t.getTarifPlein().getHeureFin().until(c.getHeureArr(), MINUTES);
                 long minutesPlein = t.getTarifPlein().getHeureDeb().until(t.getTarifPlein().getHeureFin(), MINUTES);
