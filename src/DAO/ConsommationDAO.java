@@ -13,10 +13,9 @@ import java.util.List;
 
 import static java.time.temporal.ChronoUnit.MINUTES;
 
-
 public class ConsommationDAO {
     /**
-     * Trouve une consommation dans la base de données.
+     * Trouve une consommation dans la base de donnees.
      * @param em l'EntityManager
      * @param id l'id de la consommation
      * @return la consommation
@@ -26,8 +25,13 @@ public class ConsommationDAO {
     }
 
     /**
-     * Crée une consommation associée à un compteur mais sans horaires dans la base de données.
+     * Cree une consommation associee a un compteur mais sans horaires dans la base de donnees.
      * @param em
+     * @param compteur le compteur
+     * @param date la date de la consommation
+     * @param heureDeb l'heure de debut de la consommation
+     * @param heureFin l'heure de fin de la consommation
+     * @param puissance la puissance consommee sur la periode en kWh
      * @return the new consommation associated to a compteur
      * @see CompteurDAO#addConsommation(EntityManager, Compteur, Consommation)
      */
@@ -44,11 +48,13 @@ public class ConsommationDAO {
     }
 
     /**
-     * Ajoute un horaire à la liste des horaires dans la base de données.
+     * Ajoute un horaire a la liste des horaires dans la base de donnees.
      * @param em the EntityManager
      * @param c the consommation
      * @param t the tarif
      * @return the updated consommation
+     * @throws Exception voir TarifDAO#addConsommation
+     * @see TarifDAO#addConsommation(EntityManager, Tarif, Consommation)
      */
     public static Consommation addTarif(EntityManager em, Consommation c, Tarif t) throws Exception {
         TarifDAO.addConsommation(em, t, c);
@@ -56,7 +62,7 @@ public class ConsommationDAO {
     }
 
     /**
-     * Donne l'ensemble des consommations pour une date donnée.
+     * Donne l'ensemble des consommations pour une date donnee.
      * @param em
      * @param date
      * @return the consommation
@@ -67,7 +73,7 @@ public class ConsommationDAO {
     }
 
     /**
-     * Supprime la consommation selon le compteur et les horaires associés.
+     * Supprime la consommation selon le compteur et les horaires associes.
      * @param em the EntityManager
      * @param c the consommation to remove
      */
@@ -86,7 +92,7 @@ public class ConsommationDAO {
     }
 
     /**
-     * Calcule le coût total de la consommation pour chaque tarif de celle-ci.
+     * Calcule le cout total de la consommation pour chaque tarif de celle-ci.
      * @param em the EntityManager
      * @param c the consommation
      * @return the cost
@@ -101,7 +107,7 @@ public class ConsommationDAO {
             || (c.getHeureDeb().isAfter(t.getTarifPlein().getHeureFin())
                     && c.getHeureArr().isAfter(t.getTarifPlein().getHeureFin()))) {
                 //Que du tarif creux sur la periode de conso AVANT ou APRES la periode pleine
-                cost += c.getPuissance() * t.getTarifCreux().getPrix(); // puissance consommée (kWh) * prix/kWh
+                cost += c.getPuissance() * t.getTarifCreux().getPrix(); // puissance consommee (kWh) * prix/kWh
             }
             else if(c.getHeureDeb().isBefore(t.getTarifPlein().getHeureDeb())
                     && (c.getHeureArr().isAfter(t.getTarifPlein().getHeureDeb())
@@ -117,7 +123,7 @@ public class ConsommationDAO {
             else if((c.getHeureDeb().isAfter(t.getTarifPlein().getHeureDeb())
                     && c.getHeureDeb().isBefore(t.getTarifPlein().getHeureFin()))
                     && c.getHeureArr().isAfter(t.getTarifPlein().getHeureFin())) {
-                //La periode de conso commence en tarif plein et fini après la periode creuse
+                //La periode de conso commence en tarif plein et fini apres la periode creuse
                 long minutesPlein = c.getHeureDeb().until(t.getTarifPlein().getHeureFin(), MINUTES);
                 long minutesCreux = t.getTarifPlein().getHeureFin().until(c.getHeureArr(), MINUTES);
                 double puissParMinutes = ((double) c.getPuissance())/(minutesCreux+minutesPlein);
@@ -127,7 +133,7 @@ public class ConsommationDAO {
             }
             else if((c.getHeureDeb().isBefore(t.getTarifPlein().getHeureDeb()))
                     && c.getHeureArr().isAfter(t.getTarifPlein().getHeureFin())) {
-                // La periode commence avant la periode pleine et fini après la periode pleine
+                // La periode commence avant la periode pleine et fini apres la periode pleine
                 long minutesCreux = c.getHeureDeb().until(t.getTarifPlein().getHeureDeb(), MINUTES)
                         + t.getTarifPlein().getHeureFin().until(c.getHeureArr(), MINUTES);
                 long minutesPlein = t.getTarifPlein().getHeureDeb().until(t.getTarifPlein().getHeureFin(), MINUTES);
@@ -145,7 +151,7 @@ public class ConsommationDAO {
     }
 
     /**
-     * Donne la liste des consommations de la base de données pour lesquelles le tarif t est appliqué.
+     * Donne la liste des consommations de la base de donnees pour lesquelles le tarif t est applique.
      * @param em the EntityManager
      * @param t the tarif t
      * @return a list of consommation where t is applied
@@ -156,7 +162,7 @@ public class ConsommationDAO {
     }
 
     /**
-     * Donne la liste des consommations de la base de données pour lesquelles le tarif creux tc est appliqué.
+     * Donne la liste des consommations de la base de donnees pour lesquelles le tarif creux tc est applique.
      * @param em the EntityManager
      * @param tc the tarifCreux
      * @return a list of consommation where tc is applied
@@ -167,7 +173,7 @@ public class ConsommationDAO {
     }
 
     /**
-     * Donne la somme des consommations de la base de données pour un compteur et une date donnés.
+     * Donne la somme des consommations de la base de donnees pour un compteur et une date donnes.
      * @param em the EntityManager
      * @param ct the compteur
      * @param date the date

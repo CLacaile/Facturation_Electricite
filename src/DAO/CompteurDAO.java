@@ -14,13 +14,14 @@ import java.util.List;
 public class CompteurDAO {
 
     /**
-     * Crée un nouveau compteur à une adresse existante. Elle affecte à l'attribut personne du nouveau compteur la personne
-     * résidant à l'adresse et affecte à l'attribut compteur le nouveau compteur ainsi créé. Si la personne n'existe pas,
-     * la création est annulée. Utilise AdresseDAO.updatePersonne() et AdresseDAO.updateCompteur().
+     * Cree un nouveau compteur a une adresse existante. Elle affecte a l'attribut personne du nouveau compteur la personne
+     * residant a l'adresse et affecte a l'attribut compteur le nouveau compteur ainsi cree. Si la personne n'existe pas,
+     * la creation est annulee. Utilise AdresseDAO.updatePersonne() et AdresseDAO.updateCompteur().
      * @param em
      * @param dateActivation
      * @param adresse
      * @return the created compteur
+     * @throws Exception si personne n'habite a l'adresse specifiee
      * @see AdresseDAO#updateCompteur(EntityManager, Adresse, Compteur)
      * @see AdresseDAO#updateCompteur(EntityManager, Adresse, Compteur)
      */
@@ -43,7 +44,7 @@ public class CompteurDAO {
     }
 
     /**
-     * Met à jour l'attribut personne d'un compteur. Met également à jour les attributs compteur et adresse d'une personne
+     * Met a jour l'attribut personne d'un compteur. Met egalement a jour les attributs compteur et adresse d'une personne
      * pour lui donner la même adresse que celle du compteur.
      * @param em
      * @param compteur the compteur to update
@@ -64,7 +65,7 @@ public class CompteurDAO {
     }
 
     /**
-     * Ajoute une consommation à un compteur.
+     * Ajoute une consommation a un compteur.
      * @param em
      * @param compteur
      * @param conso
@@ -81,7 +82,7 @@ public class CompteurDAO {
     }
 
     /**
-     * Met à jour l'attribut consommation d'un compteur et l'attribut compteur d'une consommation dans la base de données.
+     * Met a jour l'attribut consommation d'un compteur et l'attribut compteur d'une consommation dans la base de donnees.
      * @param em the EntityManager
      * @param compteur the compteur to update
      * @param conso the conso to update
@@ -100,7 +101,7 @@ public class CompteurDAO {
     }
 
     /**
-     * Supprime le compteur de la personne et de la consommation associées.
+     * Supprime le compteur de la personne et de la consommation associees.
      * @param em the EntityManager
      * @param c the compteur to remove
      */
@@ -118,7 +119,7 @@ public class CompteurDAO {
     }
 
     /**
-     * Calcule le coût total des consommations d'un compteur
+     * Calcule le cout total des consommations d'un compteur
      * @param em
      * @param c
      * @param date

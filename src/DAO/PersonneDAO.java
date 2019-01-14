@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class PersonneDAO {
 
     /**
-     * Trouve une personne dans la base de données.
+     * Trouve une personne dans la base de donnees.
      * @param em the EntityManager
      * @param numSS the numero de securite sociale
      * @return the personne
@@ -20,7 +20,7 @@ public class PersonneDAO {
     }
 
     /**
-     * Crée une personne sans compteur ni adresse dans la base de données. Utilise updateAdresse et updateCompteur.
+     * Cree une personne sans compteur ni adresse dans la base de donnees. Utilise updateAdresse et updateCompteur.
      * @param em
      * @param numSS
      * @param numTel
@@ -38,7 +38,7 @@ public class PersonneDAO {
     }
 
     /**
-     * Met à jour l'attribut adresse de la personne et l'attribut personne de l'adresse dans la base de données. Utilise AdresseDAO#updatePersonne().
+     * Met a jour l'attribut adresse de la personne et l'attribut personne de l'adresse dans la base de donnees. Utilise AdresseDAO#updatePersonne().
      * @param em the EntityManager
      * @param p the personne to update
      * @param a the adresse to update
@@ -51,7 +51,7 @@ public class PersonneDAO {
     }
 
     /**
-     * Met à jour l'attribut compteur de la personne et l'attribut personne attribute du compteur dans la base de données. Utilise CompteurDAO#updatePersonne().
+     * Met a jour l'attribut compteur de la personne et l'attribut personne attribute du compteur dans la base de donnees. Utilise CompteurDAO#updatePersonne().
      * @param em the EntityManager
      * @param p the personne to update
      * @param c the compteur to update
@@ -64,7 +64,7 @@ public class PersonneDAO {
     }
 
     /**
-     * Supprime une personne de l'adresse et du compteur associés.
+     * Supprime une personne de l'adresse et du compteur associes.
      * @param em the EntityManager
      * @param p the personne to remove
      */

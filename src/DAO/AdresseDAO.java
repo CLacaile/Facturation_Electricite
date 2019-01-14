@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 public class AdresseDAO {
 
     /**
-     * Crée une adresse sans compteur ni personne dans la base de données
+     * Cree une adresse sans compteur ni personne dans la base de donnees
      * @param em the EntityManager
      * @param rue the rue
      * @param ville the ville
@@ -27,7 +27,7 @@ public class AdresseDAO {
     }
 
     /**
-     * Met à jour l'attribut personne de l'adresse et l'attribut adresse de personne dans la base de données
+     * Met a jour l'attribut personne de l'adresse et l'attribut adresse de personne dans la base de donnees
      * @param em the EntityManager
      * @param a the adresse to update
      * @param p the personne to update
@@ -44,7 +44,7 @@ public class AdresseDAO {
     }
 
     /**
-     * Met à jour l'attribut compteur de l'adresse et l'attribut adresse de compteur dans la base de données
+     * Met a jour l'attribut compteur de l'adresse et l'attribut adresse de compteur dans la base de donnees
      * @param em the EntityManager
      * @param a the adresse to update
      * @param c the compteur to update
@@ -61,7 +61,7 @@ public class AdresseDAO {
     }
 
     /**
-     * Supprime l'adresse du compteur et de la personne associés
+     * Supprime l'adresse du compteur et de la personne associes
      * @param em the EntityManager
      * @param a the adresse to remove
      */
