@@ -17,6 +17,13 @@ public class Controleur {
         this.em = em;
     }
 
+    /**
+     * Execute the program. It waits for a command to be typed in by the user and calls DAO functions according to
+     * what the user has chosen :
+     * "1" to see if a Tarif Creux id entered by the user is applied to a Consommation
+     * "2" to display the cost of a compteur at a given date
+     * @return true if the execution went well, false if the user type in a wrong command.
+     */
     public boolean execute() {
         String cmd = this.vue.scanCommand();
         if (cmd.equals("1")) {
@@ -39,10 +46,18 @@ public class Controleur {
         return true;
     }
 
+    /**
+     * Populate the MySQL DB by creating 3 personnes, 3 compteurs, 3 adresses, 3 consommations and 3 tarifs like so :
+     * - the tarifs : plein tarif between 15:00 and 19:00 + prix is respectively 1€, 2€, 3€ + reduction 10%, 20%, 30%
+     * - conso1 on the 2019-01-09 from 10:00 to 18:00 for a puissance of 100kWh
+     * - conso2 on the 2019-01-09 from 22:00 to 23:59 for a puissance of 100kWh
+     * - conso3 on the 2019-01-09 from 10:00 to 23:59 for a puissance of 100kWh
+     * It uses DAO functions to do so.
+     */
     public void populateDB() {
         LocalDate date1 = LocalDate.of(2019, 1, 9);
         LocalDate date2 = LocalDate.of(2019, 1, 10);
-        LocalTime time1 = LocalTime.of(18, 0);
+        LocalTime time1 = LocalTime.of(10, 0);
         LocalTime time2 = LocalTime.of(22, 0);
         LocalTime debutCreux = LocalTime.of(19, 0);
         LocalTime finCreux = LocalTime.of(15, 0);
