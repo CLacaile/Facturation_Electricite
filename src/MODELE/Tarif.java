@@ -71,5 +71,9 @@ public class Tarif {
 		this.consommations = consommations;
 	}
 
+	public String toString() {
+		return "Tarif #"+this.id+" prix: "+this.prix+"e/kWh, reduction en heures creuses: "+this.reduction;
+	}
+
 
 }
