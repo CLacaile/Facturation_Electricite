@@ -21,7 +21,7 @@ public class Main {
 
         LocalDate date1 = LocalDate.of(2019, 1, 9);
         LocalDate date2 = LocalDate.of(2019, 1, 10);
-        LocalTime time1 = LocalTime.of(16,0);
+        LocalTime time1 = LocalTime.of(10,0);
         LocalTime time2 = LocalTime.of(22,0);
         LocalTime debutCreux = LocalTime.of(19,0);
         LocalTime finCreux = LocalTime.of(15,0);
@@ -62,6 +62,7 @@ public class Main {
             Tarif tarif3 = TarifDAO.createTarif(em, 3, 0.33, debutCreux, finCreux);
 
             cons1 = ConsommationDAO.addTarif(em, cons1, tarif1);
+            //cons1 = ConsommationDAO.addTarif(em, cons1, tarif2);
             cons2 = ConsommationDAO.addTarif(em, cons2, tarif2);
             cons3 = ConsommationDAO.addTarif(em, cons3, tarif3);
 /*

@@ -95,7 +95,6 @@ public class ConsommationDAO {
             || (c.getHeureDeb().isAfter(t.getTarifPlein().getHeureFin())
                     && c.getHeureArr().isAfter(t.getTarifPlein().getHeureFin()))) {
                 //Que du tarif creux sur la periode de conso AVANT ou APRES la periode pleine
-                System.out.println("QUE DU CREUX");
                 long minutesConso = c.getHeureDeb().until(c.getHeureArr(), MINUTES);
                 double tarifParMinute = t.getTarifCreux().getPrix()/60;
                 cost += minutesConso * tarifParMinute;
@@ -104,7 +103,6 @@ public class ConsommationDAO {
                     && (c.getHeureArr().isAfter(t.getTarifPlein().getHeureDeb())
                         && c.getHeureArr().isBefore(t.getTarifPlein().getHeureFin()))) {
                 //La periode de conso commence en tarif creux et fini pdt la periode pleine
-                System.out.println("DEBUT CREUX FIN PLEIN");
                 long minutesCreux = c.getHeureDeb().until(t.getTarifPlein().getHeureDeb(), MINUTES);
                 long minutesPlein = t.getTarifPlein().getHeureDeb().until(c.getHeureArr(), MINUTES);
                 double tarifCreuxParMin = t.getTarifCreux().getPrix()/60;
@@ -115,16 +113,24 @@ public class ConsommationDAO {
                     && c.getHeureDeb().isBefore(t.getTarifPlein().getHeureFin()))
                     && c.getHeureArr().isAfter(t.getTarifPlein().getHeureFin())) {
                 //La periode de conso commence en tarif plein et fini après la periode creuse
-                System.out.println("DEBUT PLEIN FIN CREUX");
                 long minutesPlein = c.getHeureDeb().until(t.getTarifPlein().getHeureFin(), MINUTES);
                 long minutesCreux = t.getTarifPlein().getHeureFin().until(c.getHeureArr(), MINUTES);
                 double tarifCreuxParMin = t.getTarifCreux().getPrix()/60;
                 double tarifPleinParMin = t.getTarifPlein().getPrix()/60;
                 cost += minutesCreux*tarifCreuxParMin + minutesPlein*tarifPleinParMin;
             }
+            else if((c.getHeureDeb().isBefore(t.getTarifPlein().getHeureDeb()))
+                    && c.getHeureArr().isAfter(t.getTarifPlein().getHeureFin())) {
+                // La periode commence avant la periode pleine et fini après la periode pleine
+                long minutesCreux = c.getHeureDeb().until(t.getTarifPlein().getHeureDeb(), MINUTES)
+                        + t.getTarifPlein().getHeureFin().until(c.getHeureArr(), MINUTES);
+                long minutesPlein = t.getTarifPlein().getHeureDeb().until(t.getTarifPlein().getHeureFin(), MINUTES);
+                double tarifCreuxParMin = t.getTarifCreux().getPrix()/60;
+                double tarifPleinParMin = t.getTarifPlein().getPrix()/60;
+                cost += minutesCreux*tarifCreuxParMin + minutesPlein*tarifPleinParMin;
+            }
             else {
                 //Que du tarif plein sur la periode de conso
-                System.out.println("QUE DU PLEIN");
                 long minutesConso = c.getHeureDeb().until(c.getHeureArr(), MINUTES);
                 double tarifParMinute = t.getTarifPlein().getPrix()/60;
                 cost += minutesConso * tarifParMinute;
