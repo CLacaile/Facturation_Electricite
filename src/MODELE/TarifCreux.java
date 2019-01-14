@@ -51,14 +51,14 @@ public class TarifCreux {
     }
 
     /**
-     * Return a string representation of the tarifCreux
-     * @return a string
+     * Retourne le tarif creux sous la forme d'une chaîne de caractères
+     * @return Code : #code; Prix : #prix; Heure de debut : #heureDeb; Heure de fin : #heureFin; Reduction : #reduction
      */
     public String toString() {
         return "Code : " + this.code
                 + "; Prix : " + this.prix
                 + "; Heure de debut : " + this.heureDeb
                 + "; Heure de fin : " + this.heureFin
-                + "; Réduction : " + this.getTarif().getReduction();
+                + "; Reduction : " + this.getTarif().getReduction();
     }
 }

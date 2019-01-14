@@ -51,8 +51,8 @@ public class TarifPlein {
     }
 
     /**
-     * Return a string representation of the tarifPlein
-     * @return a string
+     * Retourne le tarif plein sous la forme d'une chaîne de caractères
+     * @return Code : #code; Prix : #prix; Heure de debut : #heureDeb; Heure de fin : #heureFin
      */
     public String toString() {
         return "Code : " + this.code
