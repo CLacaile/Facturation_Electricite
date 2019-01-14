@@ -119,7 +119,10 @@ public class CompteurDAO {
      */
     public static double computeCost(EntityManager em, Compteur c, LocalDate date) {
         double cost = 0;
-
+        List<Consommation> consoList = ConsommationDAO.getConsommationsByCompteurDate(em, c, date);
+        for(Consommation cons : consoList) {
+            cost += ConsommationDAO.computeCost(em, cons);
+        }
         return cost;
     }
 
