@@ -21,8 +21,14 @@ public class Controleur {
     /**
      * Execute le programme. Par le biais de la fonction Vue#scanCommand(), elle attend une entree de l'utilisateur. Selon l'entree
      * l'affichage est le suivant :
-     * "1" pour afficher la liste des consommations où le tarif creux d'identifiant "id" est specifie
-     * "2" pour calculer et afficher la depense totale d'un compteur a un jour donne
+     * “1” pour lister les compteurs de la base de données
+     * “2” pour lister les tarifs de la base de données
+     * “3” pour lister les tarifs creux de la base de données
+     * “4” pour supprimer un compteur de la base de données
+     * “5” pour supprimer un tarif de la base de données
+     * “6” pour afficher les consommations associées à un tarif creux dont l’id est entré par l’utilisateur en appelant les fonctions DAO correspondantes
+     * “7” pour afficher la dépense d’un compteur donné à une date donnée
+     * “0” pour arrêter l’exécution
      * @return vrai si l'execution s'est bien passee, faux si la commande entree par l'utilisateur est non valide.
      */
     public boolean execute() {
