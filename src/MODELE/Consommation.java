@@ -105,7 +105,7 @@ public class Consommation {
 	}
 
 	/**
-	 * Retourne la consommation sous la forme d'une chaîne de caractères
+	 * Retourne la consommation sous la forme d'une chaine de caracteres
 	 * @return Identifiant de la consommation : #id; Heure de debut : #heureDeb; Heure de fin : #heureArr; Puissance : #puissance kWh
 	 */
 	public String toString() {

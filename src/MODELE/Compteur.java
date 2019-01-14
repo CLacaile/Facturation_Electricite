@@ -64,7 +64,7 @@ public class Compteur {
     }
 
 	/**
-	 * Retourne le compteur sous la forme d'une chaîne de caractères
+	 * Retourne le compteur sous la forme d'une chaine de caracteres
 	 * @return Numero de compteur : #numC; Date d'activation : #date; Adresse : #adresse
 	 */
     public String toString() {

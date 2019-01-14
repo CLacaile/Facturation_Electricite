@@ -52,7 +52,7 @@ public class Controleur {
     /**
      * Rempli la base de donnees MySQL par des enregistrements arbitraires 3 personnes, 3 compteurs, 3 adresses,
      * 3 consommations and 3 tarifs tels que :
-     * - les tarif1, 2, et 3 : plein tarif entre 15:00 et 19:00 + prix resp. 1€, 2€, 3€ + reduction 10%, 20%, 30%
+     * - les tarif1, 2, et 3 : plein tarif entre 15:00 et 19:00 + prix resp. 1e, 2e, 3e + reduction 10%, 20%, 30%
      * - conso1 le 2019-01-09 de 10:00 a 18:00 pour une puissance de 100kWh avec tarif1 et tarif2
      * - conso2 le 2019-01-09 de 22:00 a 23:59 pour une puissance de 100kWh avec tarif2
      * - conso3 le 2019-01-09 de 10:00 a 23:59 pour une puissance de 100kWh avec tarif3

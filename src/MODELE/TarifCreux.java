@@ -51,7 +51,7 @@ public class TarifCreux {
     }
 
     /**
-     * Retourne le tarif creux sous la forme d'une chaîne de caractères
+     * Retourne le tarif creux sous la forme d'une chaine de caracteres
      * @return Code : #code; Prix : #prix; Heure de debut : #heureDeb; Heure de fin : #heureFin; Reduction : #reduction
      */
     public String toString() {

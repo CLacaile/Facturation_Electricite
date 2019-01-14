@@ -51,7 +51,7 @@ public class TarifPlein {
     }
 
     /**
-     * Retourne le tarif plein sous la forme d'une chaîne de caractères
+     * Retourne le tarif plein sous la forme d'une chaine de caracteres
      * @return Code : #code; Prix : #prix; Heure de debut : #heureDeb; Heure de fin : #heureFin
      */
     public String toString() {

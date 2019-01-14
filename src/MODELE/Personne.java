@@ -51,7 +51,7 @@ public class Personne {
 	public void setAdresse(Adresse adresse) {this.adresse = adresse;}
 
 	/**
-	 * Retourne la personne sous la forme d'une chaîne de caractères
+	 * Retourne la personne sous la forme d'une chaine de caracteres
 	 * @return Numero de securite sociale : #numSS; Numero de telephone : #numTel
 	 */
 	public String toString() {

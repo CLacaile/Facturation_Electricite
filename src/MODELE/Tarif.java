@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Les tarifs peuvent être différents selon la puissance souscrite par ex :
+ * Les tarifs peuvent être differents selon la puissance souscrite par ex :
  * - tarif 1 (plein): 5 kWh = 1€/kWh | tarif 1 (creux) : 5kWh = 0.8€/kWh
  * - tarif 2 (plein) : 10 kWh = 1,7€/kWh | tarif 2 (creux) : 10 kWh = 1.5€/kWh
  * - tarif 5 (plein) : 20 kWh = 3€/kWh | tarif 6 (creux) : 20 kWh = 2.5€/kWh
