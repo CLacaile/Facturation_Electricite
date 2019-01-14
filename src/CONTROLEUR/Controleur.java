@@ -19,17 +19,18 @@ public class Controleur {
     }
 
     /**
-     * Execute le programme. Par le biais de la fonction Vue#scanCommand(), elle attend une entree de l'utilisateur. Selon l'entree
-     * l'affichage est le suivant :
-     * “1” pour lister les compteurs de la base de données
-     * “2” pour lister les tarifs de la base de données
-     * “3” pour lister les tarifs creux de la base de données
-     * “4” pour supprimer un compteur de la base de données
-     * “5” pour supprimer un tarif de la base de données
-     * “6” pour afficher les consommations associées à un tarif creux dont l’id est entré par l’utilisateur en appelant les fonctions DAO correspondantes
-     * “7” pour afficher la dépense d’un compteur donné à une date donnée
-     * “0” pour arrêter l’exécution
-     * @return vrai si l'execution s'est bien passee, faux si la commande entree par l'utilisateur est non valide.
+     * Execute le programme. Par le biais de la fonction Vue#scanCommand(), elle attend une entree de l'utilisateur. Selon lentree
+     * laffichage est le suivant :
+     * 1 pour lister les compteurs de la base de donnees
+     * 2 pour lister les tarifs de la base de donnees
+     * 3 pour lister les tarifs creux de la base de donnees
+     * 4 pour supprimer un compteur de la base de donnees
+     * 5 pour supprimer un tarif de la base de donnees
+     * 6 pour afficher les consommations associees a un tarif creux dont lid est entre par lutilisateur en appelant les fonctions DAO correspondantes
+     * 7 pour afficher la depense dun compteur donne a une date donnee
+     * 0 pour arrêter lexecution
+     * @return vrai si lexecution sest bien passee, faux si la commande entree par lutilisateur est non valide.
+     * @see Vue#scanCommand()
      */
     public boolean execute() {
         this.vue.displayMenu();
