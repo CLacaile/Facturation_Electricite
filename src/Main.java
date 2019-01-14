@@ -13,10 +13,11 @@ public class Main {
         Vue vue = new Vue();
         Controleur controleur = new Controleur(em, vue);
         controleur.populateDB();
-        if(controleur.execute())
-            System.exit(0);
-        else
-            System.exit(100);
+        boolean marche = true;
+        while(marche) {
+            marche = controleur.execute();
+        }
+        System.exit(0);
     }
 
 }
