@@ -62,8 +62,8 @@ public class Adresse {
 	}
 
 	/**
-	 * Return a string representation of the adresse
-	 * @return a string
+	 * Retourne l'adresse sous la forme d'une chaîne de caractères
+	 * @return Identifiant de l'adresse : #id; Rue : #rue; Ville : #ville
 	 */
 	public String toString() {
 		return "Identifiant de l'adresse : " + id
