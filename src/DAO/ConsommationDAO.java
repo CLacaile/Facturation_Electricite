@@ -16,7 +16,7 @@ import static java.time.temporal.ChronoUnit.MINUTES;
 
 public class ConsommationDAO {
     /**
-     * Trouver une consommation dans la base de données
+     * Trouve une consommation dans la base de données
      * @param em l'EntityManager
      * @param id l'id de la consommation
      * @return la consommation
@@ -26,7 +26,7 @@ public class ConsommationDAO {
     }
 
     /**
-     * Créer une consommation associé à un compteur mais sans horaires dans la base de données.
+     * Crée une consommation associée à un compteur mais sans horaires dans la base de données.
      * @param em
      * @return the new consommation associated to a compteur
      * @see CompteurDAO#addConsommation(EntityManager, Compteur, Consommation)
@@ -44,7 +44,7 @@ public class ConsommationDAO {
     }
 
     /**
-     * Add an horaires to the list of horaires in the DB.
+     * Ajoute un horaire à la liste des horaires dans la base de données.
      * @param em the EntityManager
      * @param c the consommation
      * @param t the tarif
@@ -55,13 +55,19 @@ public class ConsommationDAO {
         return c;
     }
 
+    /**
+     * Donne l'ensemble des consommations pour une date donnée.
+     * @param em
+     * @param date
+     * @return the consommation
+     */
     public static List<Consommation> getConsommationsByDate(EntityManager em, LocalDate date) {
         String hql = "select c from Consommation c where c.date = :d";
         return em.createQuery(hql).setParameter("d", date).getResultList();
     }
 
     /**
-     * Removes the consommation from the compteur and horaires associated
+     * Supprime la consommation selon le compteur et les horaires associés.
      * @param em the EntityManager
      * @param c the consommation to remove
      */
@@ -80,7 +86,7 @@ public class ConsommationDAO {
     }
 
     /**
-     * Compute the cost of a consommation for every tarif of the consommation.
+     * Calcule le coût total de la consommation pour chaque tarif de celle-ci.
      * @param em the EntityManager
      * @param c the consommation
      * @return the cost
@@ -139,7 +145,7 @@ public class ConsommationDAO {
     }
 
     /**
-     * Retrieve from the db a list of consommation where the tarif t is applied
+     * Donne la liste des consommations de la base de données pour lesquelles le tarif t est appliqué.
      * @param em the EntityManager
      * @param t the tarif t
      * @return a list of consommation where t is applied
@@ -150,7 +156,7 @@ public class ConsommationDAO {
     }
 
     /**
-     * Retrieve from the db a list of consommation where the tarifCreux tc is applied
+     * Donne la liste des consommations de la base de données pour lesquelles le tarif creux tc est appliqué.
      * @param em the EntityManager
      * @param tc the tarifCreux
      * @return a list of consommation where tc is applied
@@ -161,7 +167,7 @@ public class ConsommationDAO {
     }
 
     /**
-     * Retrieve from the db the sum of consommations for a given compteur, and a given date
+     * Donne la somme des consommations de la base de données pour un compteur et une date donnés.
      * @param em the EntityManager
      * @param ct the compteur
      * @param date the date
