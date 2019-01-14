@@ -26,6 +26,7 @@ public class Controleur {
      * @return vrai si l'execution s'est bien passee, faux si la commande entree par l'utilisateur est non valide.
      */
     public boolean execute() {
+        this.vue.displayMenu();
         String cmd = this.vue.scanCommand();
         if (cmd.equals("1")) {
             //Question 1 : liste des consommation pour un tarif creux

@@ -9,8 +9,8 @@ import java.util.Scanner;
 public class Vue {
 
     public Vue() {
-        System.out.println("========= Facturation Electricite =========");
-        displayMenu();
+
+        //displayMenu();
     }
 
     /**
@@ -20,6 +20,7 @@ public class Vue {
      *  2. Calculer le cout des consommations d'un compteur a une date
      */
     public void displayMenu() {
+        System.out.println("========= Facturation Electricite =========");
         System.out.println("Entrez votre choix: ");
         System.out.println("1. Verifier a quelle consommation a ete applique un tarif creux");
         System.out.println("2. Calculer le cout des consommations d'un compteur a une date");
