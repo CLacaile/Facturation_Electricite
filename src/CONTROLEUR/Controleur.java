@@ -59,6 +59,15 @@ public class Controleur {
                 this.vue.display("ERREUR : Ce compteur n'existe pas");
         }
         else if (cmd.equals("5")) {
+            this.vue.display("Saisir l'id du tarif a supprimer: ");
+            int id = Integer.parseInt(this.vue.scanCommand());
+            Tarif t = TarifDAO.find(em, id);
+            if(t != null)
+                TarifDAO.removeTarif(em, t);
+            else
+                this.vue.display("ERREUR : Ce tarif n'existe pas");
+        }
+        else if (cmd.equals("6")) {
             //Question 1 : liste des consommation pour un tarif creux
             this.vue.display("Entrez un id de tarif creux : ");
             int id = Integer.parseInt(this.vue.scanCommand());
@@ -66,13 +75,17 @@ public class Controleur {
             for(Consommation c : consommations) {
                 this.vue.display(c.toString());
             }
-        } else if (cmd.equals("6")) {
+        } else if (cmd.equals("7")) {
             // Question 2
             this.vue.display("Entrez un compteur : ");
-            int cmptr = this.vue.scanInteger();
+            int id = this.vue.scanInteger();
             this.vue.display("Entrez une date au format AAAA-MM-JJ: ");
             LocalDate date = this.vue.scanDate();
-            this.vue.displayCost(CompteurDAO.computeCost(em, CompteurDAO.find(em, cmptr), date));
+            Compteur c = CompteurDAO.find(em, id);
+            if(c != null)
+                this.vue.displayCost(CompteurDAO.computeCost(em, c, date));
+            else
+                this.vue.display("ERREUR : Ce compteur n'existe pas");
         } else if (cmd.equals("0")) {
             this.vue.display("FERMETURE");
             return false;

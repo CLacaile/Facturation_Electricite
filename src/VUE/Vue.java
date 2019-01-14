@@ -26,8 +26,9 @@ public class Vue {
         System.out.println("2. Lister les tarifs");
         System.out.println("3. Lister les tarifs creux");
         System.out.println("4. Supprimer un compteur");
-        System.out.println("5. Verifier a quelle(s) consommation(s) a ete applique un tarif creux");
-        System.out.println("6. Calculer le cout des consommations d'un compteur a une date");
+        System.out.println("5. Supprimer un tarif");
+        System.out.println("6. Verifier a quelle(s) consommation(s) a ete applique un tarif creux");
+        System.out.println("7. Calculer le cout des consommations d'un compteur a une date");
         System.out.println("0. Quitter");
     }
 
