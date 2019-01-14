@@ -13,24 +13,48 @@ public class Vue {
         displayMenu();
     }
 
+    /**
+     * Display a menu in the console like so :
+     * > Entrez votre choix
+     * > 1. Verifier a quelle consommation a ete applique un tarif creux
+     * > 2. Calculer le cout des consommations d'un compteur a une date
+     */
     public void displayMenu() {
         System.out.println("Entrez votre choix: ");
         System.out.println("1. Verifier a quelle consommation a ete applique un tarif creux");
         System.out.println("2. Calculer le cout des consommations d'un compteur a une date");
     }
 
+    /**
+     * Display a string in the console
+     * @param s the string to display in the console
+     */
     public void display(String s) {
         System.out.println(s);
     }
 
+    /**
+     * Display a cost in the console like :
+     * > Le cout est de: xxx
+     * @param cost the cost to display in the console
+     */
     public void displayCost(double cost) {
         System.out.println("Le cout est de: "+cost);
     }
 
+    /**
+     * Display a consommation using Consommation.toString()
+     * @param conso the consommation to display
+     * @see Consommation#toString()
+     */
     public void displayConsommation(Consommation conso) {
         System.out.println(conso.toString());
     }
 
+    /**
+     * Display a list of consommations in the console using displayConsommation()
+     * @param consommations the list of consommations to display
+     */
     public void displayConsommations(List<Consommation> consommations) {
         if(consommations.size() == 0) {
             display("Pas de consommations à afficher");
@@ -42,6 +66,10 @@ public class Vue {
         }
     }
 
+    /**
+     * Scan the console for a integer user input from the console using scanCommand()
+     * @return the integer typed in by the user in the console
+     */
     public int scanInteger() {
         String str = scanCommand();
         int res = 0;
@@ -53,6 +81,10 @@ public class Vue {
         return res;
     }
 
+    /**
+     * Scan the console for a double user input from the console using scanCommand()
+     * @return the double typed in by the user in the console
+     */
     public double scanDouble() {
         System.out.print(">> ");
         Scanner sc = new Scanner(System.in);
@@ -61,6 +93,10 @@ public class Vue {
         return res;
     }
 
+    /**
+     * Scan the console for a date YYYY-MM-DD user input from the console using scanCommand()
+     * @return the LocalDate parsed from the console
+     */
     public LocalDate scanDate() {
         System.out.print(">> ");
         Scanner sc = new Scanner(System.in);
@@ -69,6 +105,10 @@ public class Vue {
         return date;
     }
 
+    /**
+     * Scan the console for a user input from the console
+     * @return the string input by the user
+     */
     public String scanCommand() {
         System.out.print(">> ");
         Scanner sc = new Scanner(System.in);
@@ -79,5 +119,4 @@ public class Vue {
         }
         return null;
     }
-
 }
