@@ -15,9 +15,9 @@ public class Vue {
 
     /**
      * Affiche un menu dans la console de la manière suivante :
-     * > Entrez votre choix
-     * > 1. Verifier a quelle consommation a ete applique un tarif creux
-     * > 2. Calculer le cout des consommations d'un compteur a une date
+     *  Entrez votre choix
+     *  1. Verifier a quelle consommation a ete applique un tarif creux
+     *  2. Calculer le cout des consommations d'un compteur a une date
      */
     public void displayMenu() {
         System.out.println("Entrez votre choix: ");
@@ -35,7 +35,7 @@ public class Vue {
 
     /**
      * Affiche un coût dans la console de la manière suivante :
-     * > Le cout est de: xxx
+     *  Le cout est de: xxx
      * @param cost the cost to display in the console
      */
     public void displayCost(double cost) {
