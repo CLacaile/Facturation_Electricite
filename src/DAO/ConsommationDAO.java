@@ -16,17 +16,17 @@ import static java.time.temporal.ChronoUnit.MINUTES;
 
 public class ConsommationDAO {
     /**
-     * Find a Consommation in the DB
-     * @param em the EntityManager
-     * @param id the id of the consommation
-     * @return the consommation
+     * Trouver une consommation dans la base de données
+     * @param em l'EntityManager
+     * @param id l'id de la consommation
+     * @return la consommation
      */
     public static Consommation find(EntityManager em, long id) {
         return (Consommation) em.find(Consommation.class, id);
     }
 
     /**
-     * Create a consommation without horaires but with a compteur in the DB. Use updateHoraires to set the horaires
+     * Créer une consommation associé à un compteur mais sans horaires dans la base de données.
      * @param em
      * @return the new consommation associated to a compteur
      * @see CompteurDAO#addConsommation(EntityManager, Compteur, Consommation)
