@@ -14,6 +14,7 @@ public class Main {
         Controleur controleur = new Controleur(em, vue);
         controleur.populateDB();
         controleur.execute();
+        return;
     }
 
 }
