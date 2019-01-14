@@ -16,7 +16,7 @@ import static java.time.temporal.ChronoUnit.MINUTES;
 
 public class ConsommationDAO {
     /**
-     * Trouve une consommation dans la base de données
+     * Trouve une consommation dans la base de données.
      * @param em l'EntityManager
      * @param id l'id de la consommation
      * @return la consommation

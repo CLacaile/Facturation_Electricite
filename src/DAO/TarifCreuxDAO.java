@@ -11,12 +11,18 @@ import java.util.List;
 
 public class TarifCreuxDAO {
 
+    /**
+     * Trouve un tarif creux dans la base de données.
+     * @param em
+     * @param id
+     * @return le tarif creux
+     */
     public static TarifCreux find(EntityManager em, long id) {
         return (TarifCreux) em.find(TarifCreux.class, id);
     }
 
     /**
-     * Create a tarif creux in the db
+     * Crée un tarif creux dans la base de données.
      * @param em
      * @param prix
      * @param heureDeb
@@ -35,7 +41,7 @@ public class TarifCreuxDAO {
     }
 
     /**
-     * Update a tarif attibute of the tarif creux and the tarif creux attribute of a tarif in the db
+     * Met à jour l'attribut tarif d'un tarif creux et l'attribut tarif creux d'un tarif dans la base de données.
      * @param em
      * @param tarifCreuxToUpdate
      * @param tarifToUpdate
@@ -52,7 +58,7 @@ public class TarifCreuxDAO {
     }
 
     /**
-     * Removes the tarif creux from the tarif associated
+     * Supprime un tarif creux du tarif associé.
      * @param em the EntityManager
      * @param tc the tarif creux to remove
      */
@@ -65,11 +71,22 @@ public class TarifCreuxDAO {
         em.getTransaction().commit();
     }
 
+    /**
+     * Donne la liste de tous les tarifs creux de la base de données.
+     * @param em
+     * @return
+     */
     public static List<TarifCreux> getAllTarifCreux(EntityManager em) {
         Query q = em.createQuery("select tc from TarifCreux tc");
         return q.getResultList();
     }
 
+    /**
+     * Donne la liste de tous les tarifs creux de la base de données, selon un tarif donné.
+     * @param em
+     * @param t
+     * @return
+     */
     public static List<TarifCreux> getTarifsCreuxByTarif(EntityManager em, Tarif t) {
         String hql = "select tc from TarifCreux tc where tc.tarif = :tarif";
         return em.createQuery(hql).setParameter("tarif", t).getResultList();
