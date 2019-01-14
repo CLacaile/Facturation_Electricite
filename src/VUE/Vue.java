@@ -43,30 +43,6 @@ public class Vue {
     }
 
     /**
-     * Display a consommation using Consommation.toString()
-     * @param conso the consommation to display
-     * @see Consommation#toString()
-     */
-    public void displayConsommation(Consommation conso) {
-        System.out.println(conso.toString());
-    }
-
-    /**
-     * Display a list of consommations in the console using displayConsommation()
-     * @param consommations the list of consommations to display
-     */
-    public void displayConsommations(List<Consommation> consommations) {
-        if(consommations.size() == 0) {
-            display("Pas de consommations à afficher");
-        }
-        else {
-            for(Consommation c : consommations) {
-                displayConsommation(c);
-            }
-        }
-    }
-
-    /**
      * Scan the console for a integer user input from the console using scanCommand()
      * @return the integer typed in by the user in the console
      */
