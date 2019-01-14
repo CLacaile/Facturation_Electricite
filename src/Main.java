@@ -96,7 +96,10 @@ public class Main {
 
             Modele modele = new Modele();
             Vue vue = new Vue();
-            Controleur controleur = new Controleur(modele, vue);
+            Controleur controleur = new Controleur(em, modele, vue);
+            controleur.execute();
+
+
 
         } catch (Exception e){
             e.printStackTrace();
