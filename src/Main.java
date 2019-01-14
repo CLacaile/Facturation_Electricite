@@ -21,8 +21,8 @@ public class Main {
 
         LocalDate date1 = LocalDate.of(2019, 1, 9);
         LocalDate date2 = LocalDate.of(2019, 1, 10);
-        LocalTime time1 = LocalTime.of(10,0);
-        LocalTime time2 = LocalTime.of(14,59);
+        LocalTime time1 = LocalTime.of(19,30);
+        LocalTime time2 = LocalTime.of(23,00);
         LocalTime debutCreux = LocalTime.of(19,0);
         LocalTime finCreux = LocalTime.of(15,0);
         LocalTime time4 = LocalTime.of(23, 59);

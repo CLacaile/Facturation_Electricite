@@ -91,16 +91,14 @@ public class ConsommationDAO {
         for(Tarif t : tarifsConso) {
             //Compute the cost of t
             if(c.getHeureDeb().isBefore(t.getTarifPlein().getHeureDeb())
-            && c.getHeureArr().isBefore(t.getTarifCreux().getHeureDeb())) {
-                //Que du tarif creux sur la periode de conso AVANT la periode pleine
+                    && c.getHeureArr().isBefore(t.getTarifCreux().getHeureDeb())
+            || c.getHeureDeb().isAfter(t.getTarifPlein().getHeureFin())
+                    && c.getHeureArr().isAfter(t.getTarifPlein().getHeureFin())) {
+                //Que du tarif creux sur la periode de conso AVANT ou APRES la periode pleine
                 System.out.println("QUE DU CREUX");
                 long minutesConso = c.getHeureDeb().until(c.getHeureArr(), MINUTES);
                 double tarifParMinute = t.getTarifCreux().getPrix()/60;
                 cost = minutesConso * tarifParMinute;
-            }
-            else if(c.getHeureDeb().isAfter(t.getTarifPlein().getHeureFin())
-            && c.getHeureArr().isAfter(t.getTarifPlein().getHeureFin())) {
-                //Que du tarif creux sur le periode de conso APRES la periode pleine
             }
             else if(c.getHeureDeb().isBefore(t.getTarifPlein().getHeureDeb())
                     && (c.getHeureArr().isAfter(t.getTarifPlein().getHeureDeb())
@@ -114,6 +112,7 @@ public class ConsommationDAO {
             }
             else {
                 //Que du tarif plein sur la periode de conso
+
             }
         }
         return cost;
