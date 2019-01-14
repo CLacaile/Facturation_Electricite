@@ -19,11 +19,11 @@ public class Controleur {
     }
 
     /**
-     * Exécute le programme. Par le biais de la fonction Vue#scanCommand(), elle attend une entrée de l'utilisateur. Selon l'entrée
+     * Execute le programme. Par le biais de la fonction Vue#scanCommand(), elle attend une entree de l'utilisateur. Selon l'entree
      * l'affichage est le suivant :
-     * "1" pour afficher la liste des consommations où le tarif creux d'identifiant "id" est spécifié
-     * "2" pour calculer et afficher la dépense totale d'un compteur à un jour donné
-     * @return vrai si l'exécution s'est bien passée, faux si la commande entrée par l'utilisateur est non valide.
+     * "1" pour afficher la liste des consommations où le tarif creux d'identifiant "id" est specifie
+     * "2" pour calculer et afficher la depense totale d'un compteur a un jour donne
+     * @return vrai si l'execution s'est bien passee, faux si la commande entree par l'utilisateur est non valide.
      */
     public boolean execute() {
         String cmd = this.vue.scanCommand();
@@ -50,13 +50,13 @@ public class Controleur {
     }
 
     /**
-     * Rempli la base de données MySQL par des enregistrements arbitraires 3 personnes, 3 compteurs, 3 adresses,
+     * Rempli la base de donnees MySQL par des enregistrements arbitraires 3 personnes, 3 compteurs, 3 adresses,
      * 3 consommations and 3 tarifs tels que :
      * - les tarif1, 2, et 3 : plein tarif entre 15:00 et 19:00 + prix resp. 1€, 2€, 3€ + reduction 10%, 20%, 30%
-     * - conso1 le 2019-01-09 de 10:00 à 18:00 pour une puissance de 100kWh avec tarif1 et tarif2
-     * - conso2 le 2019-01-09 de 22:00 à 23:59 pour une puissance de 100kWh avec tarif2
-     * - conso3 le 2019-01-09 de 10:00 à 23:59 pour une puissance de 100kWh avec tarif3
-     * La fonction utilise les fonctions définies dans les DAO.
+     * - conso1 le 2019-01-09 de 10:00 a 18:00 pour une puissance de 100kWh avec tarif1 et tarif2
+     * - conso2 le 2019-01-09 de 22:00 a 23:59 pour une puissance de 100kWh avec tarif2
+     * - conso3 le 2019-01-09 de 10:00 a 23:59 pour une puissance de 100kWh avec tarif3
+     * La fonction utilise les fonctions definies dans les DAO.
      */
     public void populateDB() {
         LocalDate date1 = LocalDate.of(2019, 1, 9);
