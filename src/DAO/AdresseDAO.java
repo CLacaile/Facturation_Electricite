@@ -4,7 +4,6 @@ import MODELE.Adresse;
 import MODELE.Compteur;
 import MODELE.Personne;
 
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 
 public class AdresseDAO {

@@ -5,7 +5,6 @@ import MODELE.Compteur;
 import MODELE.Personne;
 
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
 
 public class PersonneDAO {
 
