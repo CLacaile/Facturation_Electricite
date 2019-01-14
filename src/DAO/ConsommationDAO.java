@@ -28,6 +28,11 @@ public class ConsommationDAO {
     /**
      * Crée une consommation associée à un compteur mais sans horaires dans la base de données.
      * @param em
+     * @param compteur le compteur
+     * @param date la date de la consommation
+     * @param heureDeb l'heure de début de la consommation
+     * @param heureFin l'heure de fin de la consommation
+     * @param puissance la puissance consommée sur la période en kWh
      * @return the new consommation associated to a compteur
      * @see CompteurDAO#addConsommation(EntityManager, Compteur, Consommation)
      */
@@ -49,6 +54,8 @@ public class ConsommationDAO {
      * @param c the consommation
      * @param t the tarif
      * @return the updated consommation
+     * @throws Exception voir TarifDAO#addConsommation
+     * @see TarifDAO#addConsommation(EntityManager, Tarif, Consommation)
      */
     public static Consommation addTarif(EntityManager em, Consommation c, Tarif t) throws Exception {
         TarifDAO.addConsommation(em, t, c);

@@ -21,6 +21,7 @@ public class CompteurDAO {
      * @param dateActivation
      * @param adresse
      * @return the created compteur
+     * @throws Exception si personne n'habite à l'adresse spécifiée
      * @see AdresseDAO#updateCompteur(EntityManager, Adresse, Compteur)
      * @see AdresseDAO#updateCompteur(EntityManager, Adresse, Compteur)
      */
